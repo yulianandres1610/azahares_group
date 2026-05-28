@@ -88,16 +88,16 @@ const SECTIONS = [
 export default function ServiciosPage() {
   return (
     <>
-      <section className="hero-bg hero-bg-noise relative isolate overflow-hidden pt-32 pb-16 text-white sm:pt-40 sm:pb-24">
+      <section className="hero-bg hero-bg-noise relative isolate overflow-hidden pt-28 pb-16 text-white sm:pt-36 sm:pb-20 lg:pt-40 lg:pb-24">
         <HeroOrbs />
-        <div className="relative z-10 mx-auto max-w-[1500px] px-5 sm:px-8 lg:px-12">
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] text-white/85 backdrop-blur">
+        <div className="relative z-10 mx-auto max-w-[1400px] px-5 text-center sm:px-8 sm:text-left lg:px-12">
+          <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-white/85 backdrop-blur sm:text-[11px]">
             Nuestros servicios
           </span>
-          <h1 className="mt-5 font-serif text-4xl font-bold leading-tight tracking-tight sm:text-5xl lg:text-6xl xl:text-7xl">
+          <h1 className="mt-5 font-serif text-[2.5rem] font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-[3.5rem] xl:text-[4.25rem]">
             Movemos lo que el mundo necesita.
           </h1>
-          <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/80 sm:text-lg">
+          <p className="mx-auto mt-5 max-w-2xl text-[15px] leading-relaxed text-white/80 sm:mx-0 sm:text-base lg:text-lg">
             Combustible, alimentos, paquetería y logística general — todo
             coordinado desde una sola operación, con precios CIF y tracking en
             tiempo real.
@@ -113,7 +113,7 @@ export default function ServiciosPage() {
             "py-20 sm:py-28 " + (i % 2 === 0 ? "bg-white" : "bg-navy-50/60")
           }
         >
-          <div className="mx-auto max-w-[1500px] px-5 sm:px-8 lg:px-12">
+          <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
             <div
               className={
                 "grid items-center gap-10 lg:grid-cols-2 " +

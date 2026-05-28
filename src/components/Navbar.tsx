@@ -46,7 +46,7 @@ export function Navbar() {
           : "bg-transparent")
       }
     >
-      <div className="mx-auto flex w-full max-w-[1500px] items-center justify-between gap-4 px-5 py-3 sm:px-8 lg:px-12 lg:py-4">
+      <div className="mx-auto flex w-full max-w-[1400px] items-center justify-between gap-4 px-5 py-3 sm:px-8 lg:px-12 lg:py-4">
         <Link href="/" className="group flex shrink-0 items-center">
           <Logo
             whiteOnDark={!scrolled}

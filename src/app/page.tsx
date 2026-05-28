@@ -94,26 +94,26 @@ export default function HomePage() {
   return (
     <>
       {/* ───── HERO ───── */}
-      <section className="hero-bg hero-bg-noise relative isolate overflow-hidden pt-32 pb-24 text-white sm:pt-40 sm:pb-32">
+      <section className="hero-bg hero-bg-noise relative isolate overflow-hidden pt-28 pb-20 text-white sm:pt-36 sm:pb-24 lg:pt-40 lg:pb-32">
         <HeroOrbs />
-        <div className="relative z-10 mx-auto max-w-[1500px] px-5 sm:px-8 lg:px-12">
-          <div className="grid items-center gap-14 lg:grid-cols-[1.1fr_1fr]">
-            <div>
-              <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] text-white/90 backdrop-blur">
+        <div className="relative z-10 mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
+          <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_1fr] lg:gap-14 xl:gap-20">
+            <div className="text-center lg:text-left">
+              <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-white/90 backdrop-blur sm:text-[11px]">
                 <Globe2 className="h-3 w-3" />
                 Logística internacional · CIF
               </span>
-              <h1 className="mt-5 font-serif text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl xl:text-7xl">
+              <h1 className="mt-5 font-serif text-[2.5rem] font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-[3.5rem] xl:text-[4.25rem]">
                 Logística sin fronteras,
                 <br />
                 <span className="text-white/70">precios cerrados en destino.</span>
               </h1>
-              <p className="mt-5 max-w-xl text-base leading-relaxed text-white/80 sm:text-lg">
+              <p className="mx-auto mt-5 max-w-xl text-[15px] leading-relaxed text-white/80 sm:text-base lg:mx-0 lg:text-lg">
                 Coordinamos combustibles en iso tanques, contenedores de
                 alimentos, paquetería y cargas internacionales con documentación
                 completa, tracking satelital y precio CIF cerrado de antemano.
               </p>
-              <div className="mt-8 flex flex-wrap items-center gap-3">
+              <div className="mt-8 flex flex-wrap items-center justify-center gap-3 lg:justify-start">
                 <Link href="/tracking" className="btn-glass-primary">
                   <Search className="h-4 w-4" />
                   Rastrear envío
@@ -125,13 +125,13 @@ export default function HomePage() {
               </div>
 
               {/* Stats con contador animado */}
-              <div className="mt-12 grid max-w-xl grid-cols-2 gap-3 sm:grid-cols-4">
+              <div className="mx-auto mt-10 grid max-w-xl grid-cols-2 gap-2.5 sm:mt-12 sm:gap-3 md:grid-cols-4 lg:mx-0">
                 {STATS.map((s) => (
                   <div
                     key={s.label}
-                    className="glass-panel rounded-2xl px-3 py-4 text-center"
+                    className="glass-panel rounded-2xl px-3 py-3.5 text-center sm:py-4"
                   >
-                    <div className="font-serif text-2xl font-bold text-white sm:text-3xl">
+                    <div className="font-serif text-[1.65rem] font-bold leading-tight text-white sm:text-3xl">
                       <AnimatedCounter
                         value={s.value}
                         prefix={s.prefix}
@@ -139,7 +139,7 @@ export default function HomePage() {
                         decimals={s.decimals}
                       />
                     </div>
-                    <div className="mt-0.5 text-[10px] font-semibold uppercase tracking-wider text-white/65">
+                    <div className="mt-0.5 text-[9.5px] font-semibold uppercase tracking-wider text-white/65 sm:text-[10px]">
                       {s.label}
                     </div>
                   </div>
@@ -147,22 +147,23 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Hero visual — imagen real de port + contenedores apilados con
-                overlay liquid glass y service pills al pie. Mejor que el SVG
-                animado anterior que se veía buggy en mobile. */}
-            <div className="relative">
+            {/* Hero visual — imagen real con overlay liquid glass y
+                service pills. Aspect ratio responsive: más cuadrado en
+                mobile para no ocupar pantalla completa, vertical en
+                desktop para acompañar el copy. */}
+            <div className="relative mx-auto w-full max-w-[520px] lg:max-w-none">
               <div className="glass-panel-strong relative overflow-hidden rounded-[28px] p-3">
-                <div className="relative aspect-[4/5] overflow-hidden rounded-2xl sm:aspect-[5/6]">
+                <div className="relative aspect-[4/3] overflow-hidden rounded-2xl sm:aspect-[5/4] lg:aspect-[4/5]">
                   <Image
                     src="https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?auto=format&fit=crop&w=1800&q=88"
                     alt="Contenedores apilados en puerto internacional"
                     fill
-                    sizes="(max-width: 1024px) 100vw, 45vw"
+                    sizes="(max-width: 640px) 90vw, (max-width: 1024px) 70vw, 45vw"
                     priority
                     className="object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-navy-900/85 via-navy-900/10 to-transparent" />
-                  <div className="absolute inset-x-0 bottom-0 p-5">
+                  <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5">
                     <div className="grid grid-cols-3 gap-2.5">
                       <ServicePill icon={Fuel} label="Combustible" />
                       <ServicePill icon={Boxes} label="Alimentos" />
@@ -170,7 +171,7 @@ export default function HomePage() {
                     </div>
                   </div>
                   {/* Tag flotante arriba */}
-                  <div className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider text-white backdrop-blur-xl">
+                  <div className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-white backdrop-blur-xl sm:text-[11px]">
                     <Ship className="h-3.5 w-3.5" />
                     En operación
                   </div>
@@ -186,13 +187,13 @@ export default function HomePage() {
       </section>
 
       {/* ───── FEATURES STRIP ───── */}
-      <section className="bg-white py-16 sm:py-24">
-        <div className="mx-auto max-w-[1500px] px-5 sm:px-8 lg:px-12">
-          <RevealOnScroll className="mb-12 text-center">
-            <span className="text-xs font-bold uppercase tracking-[0.22em] text-navy-600">
+      <section className="bg-white py-14 sm:py-20 lg:py-24">
+        <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
+          <RevealOnScroll className="mb-10 text-center sm:mb-12">
+            <span className="text-[11px] font-bold uppercase tracking-[0.22em] text-navy-600 sm:text-xs">
               Por qué Azahares
             </span>
-            <h2 className="mt-3 font-serif text-3xl font-bold text-navy-900 sm:text-4xl">
+            <h2 className="mt-3 font-serif text-[1.75rem] font-bold leading-tight text-navy-900 sm:text-3xl lg:text-4xl">
               Una sola operación, cero fricción
             </h2>
             <p className="mx-auto mt-3 max-w-2xl text-slate-600">
@@ -225,15 +226,15 @@ export default function HomePage() {
       {/* ───── SERVICES GRID ───── */}
       <section
         id="servicios"
-        className="relative overflow-hidden bg-navy-50/60 py-20 sm:py-28"
+        className="relative overflow-hidden bg-navy-50/60 py-16 sm:py-24 lg:py-28"
       >
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-navy-300/60 to-transparent" />
-        <div className="mx-auto max-w-[1500px] px-5 sm:px-8 lg:px-12">
-          <RevealOnScroll className="mb-12 max-w-2xl">
-            <span className="text-xs font-bold uppercase tracking-[0.22em] text-navy-600">
+        <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
+          <RevealOnScroll className="mb-10 max-w-2xl text-center sm:mb-12 sm:text-left">
+            <span className="text-[11px] font-bold uppercase tracking-[0.22em] text-navy-600 sm:text-xs">
               Servicios
             </span>
-            <h2 className="mt-3 font-serif text-3xl font-bold text-navy-900 sm:text-4xl">
+            <h2 className="mt-3 font-serif text-[1.75rem] font-bold leading-tight text-navy-900 sm:text-3xl lg:text-4xl">
               Cuatro verticales, una sola red logística
             </h2>
             <p className="mt-3 text-slate-600">
@@ -287,15 +288,15 @@ export default function HomePage() {
       </section>
 
       {/* ───── CTA TRACKING ───── */}
-      <section className="relative isolate overflow-hidden py-20 sm:py-28">
+      <section className="relative isolate overflow-hidden py-16 sm:py-24 lg:py-28">
         <div className="absolute inset-0 hero-bg" />
         <HeroOrbs />
         <div className="relative z-10 mx-auto max-w-5xl px-5 text-center text-white sm:px-8 lg:px-12">
           <RevealOnScroll>
-            <span className="text-xs font-bold uppercase tracking-[0.22em] text-white/75">
+            <span className="text-[11px] font-bold uppercase tracking-[0.22em] text-white/75 sm:text-xs">
               Tracking
             </span>
-            <h2 className="mt-3 font-serif text-3xl font-bold sm:text-5xl">
+            <h2 className="mt-3 font-serif text-[1.75rem] font-bold leading-tight sm:text-4xl lg:text-5xl">
               Saber dónde está tu carga, siempre.
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-white/80">

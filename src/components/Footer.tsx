@@ -19,7 +19,7 @@ export function Footer() {
   return (
     <footer className="relative overflow-hidden bg-navy-900 text-white">
       <div className="absolute inset-0 hero-bg opacity-55" />
-      <div className="relative mx-auto max-w-[1500px] px-5 sm:px-8 lg:px-12">
+      <div className="relative mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
         {/* ───── Top — logo + tagline únicos, centrados ───── */}
         <div className="flex flex-col items-center border-b border-white/10 py-12 text-center sm:py-14">
           <Logo whiteOnDark height={56} className="h-12 w-auto sm:h-14" />

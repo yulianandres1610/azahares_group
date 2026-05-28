@@ -32,16 +32,16 @@ const CHANNELS = [
 export default function ContactoPage() {
   return (
     <>
-      <section className="hero-bg hero-bg-noise relative isolate overflow-hidden pt-32 pb-16 text-white sm:pt-40 sm:pb-24">
+      <section className="hero-bg hero-bg-noise relative isolate overflow-hidden pt-28 pb-14 text-white sm:pt-36 sm:pb-20 lg:pt-40 lg:pb-24">
         <HeroOrbs />
-        <div className="relative z-10 mx-auto max-w-[1500px] px-5 sm:px-8 lg:px-12">
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] text-white/85 backdrop-blur">
+        <div className="relative z-10 mx-auto max-w-[1400px] px-5 text-center sm:px-8 sm:text-left lg:px-12">
+          <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-white/85 backdrop-blur sm:text-[11px]">
             Contacto
           </span>
-          <h1 className="mt-5 font-serif text-4xl font-bold leading-tight tracking-tight sm:text-5xl lg:text-6xl xl:text-7xl">
+          <h1 className="mt-5 font-serif text-[2.5rem] font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-[3.5rem] xl:text-[4.25rem]">
             Conversemos.
           </h1>
-          <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/80 sm:text-lg">
+          <p className="mx-auto mt-5 max-w-2xl text-[15px] leading-relaxed text-white/80 sm:mx-0 sm:text-base lg:text-lg">
             Cotizaciones CIF en menos de 24 horas. Coordinamos combustible,
             alimentos, paquetería y logística general — contanos qué necesitás
             mover.
@@ -50,7 +50,7 @@ export default function ContactoPage() {
       </section>
 
       <section className="bg-slate-50 py-16 sm:py-24">
-        <div className="mx-auto max-w-[1500px] px-5 sm:px-8 lg:px-12">
+        <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
           <div className="grid gap-10 lg:grid-cols-[1fr_1.2fr]">
             <RevealOnScroll direction="right">
               <div className="space-y-6">
