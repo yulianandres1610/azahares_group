@@ -11,11 +11,19 @@ export default function TrackingPage() {
   return (
     <>
       {/* ───── HERO LIGHT con imagen — sección minimalista:
-          card del search centrada verticalmente en el viewport
-          (calc(100vh - navbar). Cuando aparecen resultados, el contenedor
-          crece naturalmente y el scroll automático del TrackingClient
-          lleva al user al header del resultado. */}
-      <section className="relative isolate flex min-h-[calc(100vh-76px)] items-center overflow-hidden bg-white py-16 sm:py-20 lg:min-h-[calc(100vh-88px)] lg:py-24">
+          card centrada en el VIEWPORT VISIBLE debajo del navbar.
+
+          Truco: el navbar es 'fixed top:0' (no quita espacio del flow),
+          entonces si usamos min-h con calc(vh - navbar), el flex items-
+          center centra dentro de la sección pero esa sección empieza en
+          y:0 (DETRÁS del navbar), por lo que el centro visual queda
+          desplazado hacia arriba.
+
+          Fix: usamos min-h-screen + pt = altura navbar. La sección llena
+          el viewport entero, el padding-top empuja al contenido fuera de
+          la zona oculta por el navbar, y items-center lo centra en la
+          parte VISIBLE. */}
+      <section className="relative isolate flex min-h-screen items-center overflow-hidden bg-white pt-[76px] pb-16 sm:pt-[88px] sm:pb-20 lg:pb-24">
         {/* Imagen de fondo — composición logística light */}
         <div className="pointer-events-none absolute inset-0">
           <Image
