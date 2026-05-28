@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { TrackingClient } from "@/components/TrackingClient";
-import { Activity, Ship, ShieldCheck } from "lucide-react";
+import { Ship } from "lucide-react";
 
 export const metadata = {
   title: "Tracking · Azahares Import & Export",
@@ -8,29 +8,13 @@ export const metadata = {
     "Rastreá tu envío con número de orden, factura o booking CAT. Tracking GPS en tiempo real.",
 };
 
-const TRUST = [
-  {
-    icon: Activity,
-    title: "Actualizado al instante",
-    desc: "Cada cambio operacional se refleja en el tracking en menos de un minuto.",
-  },
-  {
-    icon: Ship,
-    title: "GPS satelital",
-    desc: "Coordenadas precisas del contenedor cada hora, desde yard hasta delivery.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Acceso público",
-    desc: "Compartí el código con tu cliente — no necesita usuario ni contraseña.",
-  },
-];
-
 export default function TrackingPage() {
   return (
     <>
-      {/* ───── HERO LIGHT con imagen ───── */}
-      <section className="relative isolate overflow-hidden bg-white pt-24 pb-12 sm:pt-32 sm:pb-16 lg:pt-32 lg:pb-20">
+      {/* ───── HERO LIGHT con imagen — única sección de la página
+          (minimalist by design). Aumento pb para que la transición al
+          footer sea generosa y la imagen de fondo se aprecie completa. */}
+      <section className="relative isolate overflow-hidden bg-white pt-24 pb-20 sm:pt-32 sm:pb-28 lg:pt-32 lg:pb-32">
         {/* Imagen de fondo — composición logística light */}
         <div className="pointer-events-none absolute inset-0">
           <Image
@@ -77,29 +61,6 @@ export default function TrackingPage() {
         </div>
       </section>
 
-      {/* ───── TRUST STRIP ───── */}
-      <section className="bg-gradient-to-b from-white to-slate-50 py-14 sm:py-20">
-        <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
-          <div className="grid gap-5 md:grid-cols-3 md:gap-6">
-            {TRUST.map((t) => (
-              <div
-                key={t.title}
-                className="rounded-3xl border border-navy-100 bg-white p-6 transition hover:-translate-y-1 hover:shadow-[0_18px_40px_rgba(13,27,61,0.1)] sm:p-7"
-              >
-                <div className="grid h-11 w-11 place-items-center rounded-2xl bg-navy-900 text-white sm:h-12 sm:w-12">
-                  <t.icon className="h-5 w-5" strokeWidth={2.2} />
-                </div>
-                <h3 className="mt-4 font-serif text-lg font-bold text-navy-900 sm:text-xl">
-                  {t.title}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate-600">
-                  {t.desc}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
     </>
   );
 }
