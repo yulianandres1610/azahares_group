@@ -5,9 +5,7 @@ import {
   Boxes,
   CheckCircle2,
   Fuel,
-  Globe2,
   Package,
-  Plane,
   Search,
   Ship,
   Sparkles,
@@ -94,19 +92,16 @@ export default function HomePage() {
   return (
     <>
       {/* ───── HERO ───── */}
-      {/* Padding lg ajustado a pt-28/pb-20 (era pt-40/pb-32) para que el
-          hero entre completo en la altura de un MacBook Pro 14" (982px de
-          viewport útil) sin scroll. xl mantiene el padding generoso. */}
-      <section className="hero-bg hero-bg-noise relative isolate overflow-hidden pt-28 pb-16 text-white sm:pt-32 sm:pb-20 lg:pt-28 lg:pb-20 xl:pt-36 xl:pb-28">
+      {/* Padding ajustado por breakpoint:
+           - lg (MBP 14, ~982px alto): pt-28/pb-20 para que el hero entre completo.
+           - xl (Full HD ~1080px alto): pt-36/pb-28 + min-h para que la sección
+             ocupe el viewport entero y no deje un strip blanco antes de Features. */}
+      <section className="hero-bg hero-bg-noise relative isolate flex items-center overflow-hidden pt-28 pb-16 text-white sm:pt-32 sm:pb-20 lg:min-h-[calc(100vh-76px)] lg:pt-28 lg:pb-16 xl:min-h-[calc(100vh-88px)] xl:pt-24 xl:pb-20">
         <HeroOrbs />
         <div className="relative z-10 mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
           <div className="grid items-center gap-10 lg:grid-cols-[1.1fr_1fr] lg:gap-12 xl:gap-16">
             <div className="text-center lg:text-left">
-              <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-white/90 backdrop-blur sm:text-[11px]">
-                <Globe2 className="h-3 w-3" />
-                Logística internacional · CIF
-              </span>
-              <h1 className="mt-5 font-serif text-[2.5rem] font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-[3rem] xl:text-[3.75rem] 2xl:text-[4.25rem]">
+              <h1 className="font-serif text-[2.5rem] font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-[3rem] xl:text-[3.75rem] 2xl:text-[4.25rem]">
                 Logística sin fronteras,
                 <br />
                 <span className="text-white/70">precios cerrados en destino.</span>
@@ -152,12 +147,10 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Hero visual — render compuesto custom de Azahares con barco
-                contenedor, ISO tank, reefer con alimentos, truck y avión
-                sobre mapa mundial con location pins. Encaja navy + blanco
-                con la identidad visual de la marca. Aspect 4:3 mobile,
-                5:4 sm+ para mantener la altura del hero contenida en MBP
-                14" sin forzar scroll. */}
+            {/* Hero visual — render compuesto custom de Azahares limpio.
+                Sin badges ni overlays — la imagen habla por sí misma con
+                todos los servicios (ship, ISO tank, reefer, truck, plane,
+                mapa con pins). */}
             <div className="relative mx-auto w-full max-w-[520px] lg:max-w-[560px] xl:max-w-[640px]">
               <div className="glass-panel-strong relative overflow-hidden rounded-[28px] p-3">
                 <div className="relative aspect-[16/9] overflow-hidden rounded-2xl sm:aspect-[16/10]">
@@ -169,21 +162,6 @@ export default function HomePage() {
                     priority
                     className="object-cover"
                   />
-                  {/* Overlay sutil — la imagen ya es navy oscura, solo
-                      reforzamos el bottom para legibilidad de los pills. */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-navy-900/70 via-transparent to-transparent" />
-                  <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5">
-                    <div className="grid grid-cols-3 gap-2.5">
-                      <ServicePill icon={Fuel} label="Combustible" />
-                      <ServicePill icon={Boxes} label="Alimentos" />
-                      <ServicePill icon={Plane} label="Aéreo" />
-                    </div>
-                  </div>
-                  {/* Tag flotante arriba */}
-                  <div className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-white backdrop-blur-xl sm:text-[11px]">
-                    <Ship className="h-3.5 w-3.5" />
-                    En operación
-                  </div>
                 </div>
               </div>
               <div
@@ -329,19 +307,3 @@ export default function HomePage() {
   );
 }
 
-function ServicePill({
-  icon: Icon,
-  label,
-}: {
-  icon: typeof Fuel;
-  label: string;
-}) {
-  return (
-    <div className="flex flex-col items-center gap-1.5 rounded-2xl bg-white/15 px-2 py-3 text-center backdrop-blur">
-      <Icon className="h-5 w-5 text-white" />
-      <span className="text-[11px] font-semibold uppercase tracking-wider text-white/90">
-        {label}
-      </span>
-    </div>
-  );
-}
