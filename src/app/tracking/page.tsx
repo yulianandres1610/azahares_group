@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { TrackingClient } from "@/components/TrackingClient";
-import { Ship } from "lucide-react";
 
 export const metadata = {
   title: "Tracking · Azahares Import & Export",
@@ -33,23 +32,9 @@ export default function TrackingPage() {
         </div>
 
         <div className="relative z-10 mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
-          {/* Headline centrado */}
-          <div className="mx-auto max-w-2xl text-center">
-            <span className="inline-flex items-center gap-2 rounded-full border border-navy-200 bg-white/85 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.22em] text-navy-700 shadow-[0_4px_18px_rgba(13,27,61,0.08)] backdrop-blur sm:text-[11px]">
-              <Ship className="h-3 w-3" />
-              Seguimiento de envíos
-            </span>
-            <h1 className="mt-5 font-serif text-[2.25rem] font-bold leading-[1.08] tracking-tight text-navy-900 sm:text-[2.75rem] lg:text-[3.25rem]">
-              Tracking de tu carga, en tiempo real
-            </h1>
-            <p className="mx-auto mt-4 max-w-lg text-[15px] leading-relaxed text-navy-800/70 sm:text-base">
-              Consultá el estado de tu envío con el número de orden, factura
-              o booking CAT. Datos GPS actualizados cada hora.
-            </p>
-          </div>
-
-          {/* Glass card central con el form */}
-          <div className="relative mx-auto mt-10 max-w-3xl sm:mt-12">
+          {/* Glass card central con el form — sin texto previo, máxima
+              limpieza visual: el imagery del hero + la card hablan solas. */}
+          <div className="relative mx-auto max-w-3xl">
             <div
               aria-hidden
               className="pointer-events-none absolute -inset-4 -z-10 rounded-[40px] bg-gradient-to-br from-navy-100/30 to-navy-200/20 blur-2xl"
