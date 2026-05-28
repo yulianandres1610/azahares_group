@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   AlertCircle,
@@ -32,6 +32,24 @@ export function TrackingClient() {
   const [data, setData] = useState<PublicTrackingResponse | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  /** Ref al header del resultado — usamos scrollIntoView para llevar al
+   *  user al resultado cuando llega data. Da una sensación moderna de
+   *  'el sitio reacciona a tu acción' en vez de mostrar todo abajo
+   *  silenciosamente. */
+  const resultRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!data || loading) return;
+    // Pequeño delay para que la animación de entrada empiece antes del
+    // scroll — sino el scroll y la entrada compiten visualmente.
+    const t = setTimeout(() => {
+      resultRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }, 250);
+    return () => clearTimeout(t);
+  }, [data, loading]);
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -146,20 +164,24 @@ export function TrackingClient() {
         )}
       </AnimatePresence>
 
-      {/* ───── RESULT ───── */}
-      <AnimatePresence>
-        {data && !loading && (
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, ease: [0.21, 0.47, 0.32, 0.98] }}
-            className="space-y-6"
-          >
-            <TrackingHeader data={data} />
-            <TrackingTimeline timeline={data.timeline} />
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* ───── RESULT ─────
+          Wrapper con ref para que el scrollIntoView del useEffect lleve
+          al user directamente al header del resultado al recibir data. */}
+      <div ref={resultRef} className="scroll-mt-24 lg:scroll-mt-28">
+        <AnimatePresence>
+          {data && !loading && (
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.55, ease: [0.21, 0.47, 0.32, 0.98] }}
+              className="space-y-6"
+            >
+              <TrackingHeader data={data} />
+              <TrackingTimeline timeline={data.timeline} />
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
     </div>
   );
 }

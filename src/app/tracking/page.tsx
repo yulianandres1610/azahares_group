@@ -10,10 +10,12 @@ export const metadata = {
 export default function TrackingPage() {
   return (
     <>
-      {/* ───── HERO LIGHT con imagen — única sección de la página
-          (minimalist by design). Aumento pb para que la transición al
-          footer sea generosa y la imagen de fondo se aprecie completa. */}
-      <section className="relative isolate overflow-hidden bg-white pt-24 pb-20 sm:pt-32 sm:pb-28 lg:pt-32 lg:pb-32">
+      {/* ───── HERO LIGHT con imagen — sección minimalista:
+          card del search centrada verticalmente en el viewport
+          (calc(100vh - navbar). Cuando aparecen resultados, el contenedor
+          crece naturalmente y el scroll automático del TrackingClient
+          lleva al user al header del resultado. */}
+      <section className="relative isolate flex min-h-[calc(100vh-76px)] items-center overflow-hidden bg-white py-16 sm:py-20 lg:min-h-[calc(100vh-88px)] lg:py-24">
         {/* Imagen de fondo — composición logística light */}
         <div className="pointer-events-none absolute inset-0">
           <Image
@@ -24,14 +26,11 @@ export default function TrackingPage() {
             priority
             className="object-cover object-center"
           />
-          {/* Overlay para fade hacia los bordes — la imagen ya es light,
-              solo aclaramos un poco más para que el texto se lea bien sobre
-              cualquier sección del compuesto. */}
           <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-white/55 to-white/85" />
           <div className="absolute inset-0 bg-gradient-to-r from-white/65 via-white/20 to-white/65" />
         </div>
 
-        <div className="relative z-10 mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
+        <div className="relative z-10 mx-auto w-full max-w-[1400px] px-5 sm:px-8 lg:px-12">
           {/* Glass card central con el form — sin texto previo, máxima
               limpieza visual: el imagery del hero + la card hablan solas. */}
           <div className="relative mx-auto max-w-3xl">
