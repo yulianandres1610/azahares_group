@@ -176,25 +176,49 @@ export default function ServiciosPage() {
         </section>
       ))}
 
-      {/* ───── CTA final ───── */}
-      <section className="relative isolate overflow-hidden py-20 text-white sm:py-28">
-        <div className="absolute inset-0 hero-bg" />
-        <HeroOrbs />
+      {/* ───── CTA final — light con imagen tracking de fondo, evita el
+          choque visual de bg navy contra el footer también navy. */}
+      <section className="relative isolate overflow-hidden bg-white py-16 sm:py-24 lg:py-28">
+        <div className="pointer-events-none absolute inset-0">
+          <Image
+            src="/images/tracking-hero.png"
+            alt=""
+            fill
+            sizes="100vw"
+            className="object-cover object-center"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-white/55 to-white/80" />
+          <div className="absolute inset-0 bg-gradient-to-r from-white/55 via-white/15 to-white/55" />
+        </div>
+
         <div className="relative z-10 mx-auto max-w-3xl px-5 text-center sm:px-8 lg:px-12">
           <RevealOnScroll>
-            <h2 className="font-serif text-3xl font-bold sm:text-5xl">
+            <span className="inline-flex items-center gap-2 rounded-full border border-navy-200 bg-white px-3 py-1 text-[10px] font-bold uppercase tracking-[0.22em] text-navy-700 shadow-[0_4px_18px_rgba(13,27,61,0.08)] sm:text-[11px]">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inset-0 animate-ping rounded-full bg-success-500 opacity-75" />
+                <span className="relative h-2 w-2 rounded-full bg-success-500" />
+              </span>
+              Cotización CIF
+            </span>
+            <h2 className="mt-4 font-serif text-[1.85rem] font-bold leading-tight text-navy-900 sm:text-[2.25rem] lg:text-[2.75rem]">
               ¿Listos para mover tu carga?
             </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-white/80">
+            <p className="mx-auto mt-4 max-w-2xl text-[15px] leading-relaxed text-navy-800/75 sm:text-base">
               Te respondemos en menos de 24 horas con una cotización CIF
               cerrada y los pasos para arrancar la operación.
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
-              <Link href="/contacto" className="btn-glass-primary">
+              <Link
+                href="/contacto"
+                className="inline-flex items-center gap-2 rounded-full border-2 border-navy-900 bg-navy-900 px-7 py-3 text-sm font-bold text-white shadow-[0_10px_30px_rgba(13,27,61,0.28)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-white hover:text-navy-900"
+              >
                 Contactanos
                 <ArrowRight className="h-4 w-4" />
               </Link>
-              <Link href="/tracking" className="btn-glass-ghost">
+              <Link
+                href="/tracking"
+                className="inline-flex items-center gap-2 rounded-full border-2 border-navy-900 bg-transparent px-7 py-3 text-sm font-bold text-navy-900 transition-all duration-200 hover:-translate-y-0.5 hover:bg-navy-900 hover:text-white"
+              >
                 Ya tengo un envío activo
               </Link>
             </div>

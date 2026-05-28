@@ -91,27 +91,37 @@ export default function HomePage() {
       {/* Sin min-h forzado — el hero crece naturalmente al contenido,
           evitando una franja navy vacía en el bottom cuando el contenido
           es más chico que el viewport (Full HD especialmente). */}
-      <section className="hero-bg hero-bg-noise relative isolate overflow-hidden pt-28 pb-20 text-white sm:pt-32 sm:pb-24 lg:pt-32 lg:pb-28 xl:pt-36 xl:pb-32">
+      <section className="hero-bg hero-bg-noise relative isolate overflow-hidden pt-24 pb-14 text-white sm:pt-32 sm:pb-24 lg:pt-32 lg:pb-28 xl:pt-36 xl:pb-32">
         <HeroOrbs />
         <div className="relative z-10 mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
           <div className="grid items-center gap-10 lg:grid-cols-[1.1fr_1fr] lg:gap-12 xl:gap-16">
             <div className="text-center lg:text-left">
-              <h1 className="font-serif text-[2.5rem] font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-[3rem] xl:text-[3.75rem] 2xl:text-[4.25rem]">
-                Logística sin fronteras,
-                <br />
+              {/* Typography mobile-tuned: h1 más chico para que no se
+                  desborde en iPhone 14/15/17 (~390px), <br> sale en mobile
+                  para mejor wrap. Desktop intacto desde sm:. */}
+              <h1 className="font-serif text-[2.1rem] font-bold leading-[1.08] tracking-tight sm:text-5xl sm:leading-[1.05] lg:text-[3rem] xl:text-[3.75rem] 2xl:text-[4.25rem]">
+                Logística sin fronteras,{" "}
                 <span className="text-white/70">precios cerrados en destino.</span>
               </h1>
-              <p className="mx-auto mt-4 max-w-xl text-[15px] leading-relaxed text-white/80 sm:mt-5 sm:text-base lg:mx-0 lg:text-[15.5px] xl:text-lg">
+              <p className="mx-auto mt-3 max-w-xl text-[14px] leading-relaxed text-white/80 sm:mt-5 sm:text-base lg:mx-0 lg:text-[15.5px] xl:text-lg">
                 Coordinamos combustibles en iso tanques, contenedores de
                 alimentos, paquetería y cargas internacionales con documentación
                 completa, tracking satelital y precio CIF cerrado de antemano.
               </p>
-              <div className="mt-7 flex flex-wrap items-center justify-center gap-3 lg:justify-start">
-                <Link href="/tracking" className="btn-glass-primary">
+              {/* Mobile: botones full-width stacked para mejor tap target.
+                  Desktop sm+: vuelve al flex-wrap horizontal. */}
+              <div className="mt-6 flex flex-col gap-2.5 sm:mt-7 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:gap-3 lg:justify-start">
+                <Link
+                  href="/tracking"
+                  className="btn-glass-primary justify-center sm:justify-start"
+                >
                   <Search className="h-4 w-4" />
                   Rastrear envío
                 </Link>
-                <Link href="/servicios" className="btn-glass-ghost">
+                <Link
+                  href="/servicios"
+                  className="btn-glass-ghost justify-center sm:justify-start"
+                >
                   Conocer servicios
                   <ArrowRight className="h-4 w-4" />
                 </Link>
@@ -150,8 +160,8 @@ export default function HomePage() {
               <div className="glass-panel-strong relative overflow-hidden rounded-[28px] p-3">
                 <div className="relative aspect-[16/9] overflow-hidden rounded-2xl sm:aspect-[16/10]">
                   <Image
-                    src="/images/home-hero-logistics.png"
-                    alt="Logística internacional Azahares — barco, ISO tank, reefer y avión cargo sobre red mundial"
+                    src="/images/tracking-hero.png"
+                    alt="Logística internacional Azahares — barco contenedor, avión cargo y truck sobre red mundial"
                     fill
                     sizes="(max-width: 640px) 90vw, (max-width: 1024px) 70vw, 45vw"
                     priority
