@@ -15,7 +15,6 @@ import {
 import { HeroOrbs } from "@/components/HeroOrbs";
 import { RevealOnScroll } from "@/components/RevealOnScroll";
 import { AnimatedCounter } from "@/components/AnimatedCounter";
-import { ShipScene } from "@/components/ShipScene";
 
 const STATS: Array<{
   value: number | string;
@@ -36,58 +35,58 @@ const SERVICES = [
     icon: Fuel,
     title: "Combustible en iso tanques",
     description:
-      "Gasolina, diésel y jet fuel exportados en iso tanques de 20 ft con documentación completa lista para Aduana.",
+      "Gasolina, diésel y jet fuel exportados en iso tanques de 20 ft. Documentación BIS/EAR99 completa, BOL marítimo y certificados de calidad listos para Aduana.",
     cta: "Conocer más",
     image:
-      "https://images.unsplash.com/photo-1605281317010-fe5ffe798166?auto=format&fit=crop&w=1800&q=85",
+      "https://images.unsplash.com/photo-1592838064575-70ed626d3a0e?auto=format&fit=crop&w=2200&q=85",
   },
   {
     id: "alimentos",
     icon: Boxes,
     title: "Contenedores de alimentos",
     description:
-      "Reefer y dry de 20 ft y 40 ft para víveres, refrigerados y productos secos. Manifiestos detallados y cadena de frío garantizada.",
+      "Reefer y dry de 20 ft y 40 ft para víveres, productos refrigerados y secos. Cadena de frío certificada y manifiesto detallado por SKU.",
     cta: "Ver contenedores",
     image:
-      "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=1800&q=85",
+      "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=2200&q=85",
   },
   {
     id: "courier",
     icon: Package,
     title: "Courier y paquetería",
     description:
-      "Servicio puerta a puerta para envíos personales y comerciales con trazabilidad en línea y tiempos comprometidos.",
+      "Servicio puerta a puerta para envíos personales y comerciales con trazabilidad en vivo, tiempos comprometidos y delivery al consignatario final.",
     cta: "Solicitar envío",
     image:
-      "https://images.unsplash.com/photo-1566576721346-d4a3b4eaeb55?auto=format&fit=crop&w=1800&q=85",
+      "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=2200&q=85",
   },
   {
     id: "logistica",
     icon: Ship,
     title: "Logística internacional",
     description:
-      "Coordinación end-to-end de cargas — booking marítimo o aéreo, documentación BIS/EAR99, despacho aduanero y delivery final.",
+      "Coordinación end-to-end — booking marítimo o aéreo, despacho aduanero, documentación BIS/EAR99 y última milla con red de partners verificados.",
     cta: "Hablar con ventas",
     image:
-      "https://images.unsplash.com/photo-1577563908411-5077b6dc7624?auto=format&fit=crop&w=1800&q=85",
+      "https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?auto=format&fit=crop&w=2200&q=85",
   },
 ];
 
 const FEATURES = [
   {
     icon: CheckCircle2,
-    title: "Precio CIF transparente",
-    desc: "Todo cotizado puesto en destino — flete, THC, seguro, documentación y aduana ya incluidos.",
+    title: "Precio CIF cerrado",
+    desc: "Cotización final incluye flete marítimo o aéreo, THC, seguro, documentación, despacho aduanero y delivery. Sin cargos sorpresa al arribo.",
   },
   {
     icon: Sparkles,
-    title: "Documentación lista",
-    desc: "Factura comercial export, packing list, Dangerous Goods Declaration y BOL generados automáticamente.",
+    title: "Documentación impecable",
+    desc: "Generamos Commercial Invoice, Packing List, Dangerous Goods Declaration y BOL en formato exigido por la naviera y autoridades aduaneras.",
   },
   {
     icon: Search,
-    title: "Tracking en tiempo real",
-    desc: "Seguí cada contenedor desde la salida del yard hasta la entrega final con GPS satelital cada hora.",
+    title: "Trazabilidad satelital",
+    desc: "Cada contenedor reporta posición GPS por hora desde la salida del yard hasta la entrega — vos y tu cliente ven el mismo dato en tiempo real.",
   },
 ];
 
@@ -105,14 +104,14 @@ export default function HomePage() {
                 Logística internacional · CIF
               </span>
               <h1 className="mt-5 font-serif text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl xl:text-7xl">
-                Movemos tu carga,
+                Logística sin fronteras,
                 <br />
-                <span className="text-white/70">a cualquier destino.</span>
+                <span className="text-white/70">precios cerrados en destino.</span>
               </h1>
               <p className="mt-5 max-w-xl text-base leading-relaxed text-white/80 sm:text-lg">
-                Combustibles en iso tanques, contenedores de alimentos, courier
-                de paquetería y logística internacional — todo con precio CIF
-                cerrado y tracking satelital en vivo.
+                Coordinamos combustibles en iso tanques, contenedores de
+                alimentos, paquetería y cargas internacionales con documentación
+                completa, tracking satelital y precio CIF cerrado de antemano.
               </p>
               <div className="mt-8 flex flex-wrap items-center gap-3">
                 <Link href="/tracking" className="btn-glass-primary">
@@ -148,16 +147,33 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Hero visual — ShipScene animada */}
+            {/* Hero visual — imagen real de port + contenedores apilados con
+                overlay liquid glass y service pills al pie. Mejor que el SVG
+                animado anterior que se veía buggy en mobile. */}
             <div className="relative">
-              <div className="glass-panel-strong relative overflow-hidden rounded-[28px] p-6">
-                <div className="rounded-2xl bg-gradient-to-br from-navy-800 via-navy-700 to-navy-900 p-4 shadow-inner">
-                  <ShipScene className="rounded-xl" />
-                </div>
-                <div className="mt-5 grid grid-cols-3 gap-3">
-                  <ServicePill icon={Fuel} label="Combustible" />
-                  <ServicePill icon={Boxes} label="Alimentos" />
-                  <ServicePill icon={Plane} label="Aéreo" />
+              <div className="glass-panel-strong relative overflow-hidden rounded-[28px] p-3">
+                <div className="relative aspect-[4/5] overflow-hidden rounded-2xl sm:aspect-[5/6]">
+                  <Image
+                    src="https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?auto=format&fit=crop&w=1800&q=88"
+                    alt="Contenedores apilados en puerto internacional"
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 45vw"
+                    priority
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-navy-900/85 via-navy-900/10 to-transparent" />
+                  <div className="absolute inset-x-0 bottom-0 p-5">
+                    <div className="grid grid-cols-3 gap-2.5">
+                      <ServicePill icon={Fuel} label="Combustible" />
+                      <ServicePill icon={Boxes} label="Alimentos" />
+                      <ServicePill icon={Plane} label="Aéreo" />
+                    </div>
+                  </div>
+                  {/* Tag flotante arriba */}
+                  <div className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider text-white backdrop-blur-xl">
+                    <Ship className="h-3.5 w-3.5" />
+                    En operación
+                  </div>
                 </div>
               </div>
               <div
@@ -177,12 +193,12 @@ export default function HomePage() {
               Por qué Azahares
             </span>
             <h2 className="mt-3 font-serif text-3xl font-bold text-navy-900 sm:text-4xl">
-              Operación end-to-end, sin sorpresas
+              Una sola operación, cero fricción
             </h2>
             <p className="mx-auto mt-3 max-w-2xl text-slate-600">
-              Sumamos en una sola plataforma todo lo necesario para que tu
-              importación o exportación salga limpia desde la cotización hasta
-              la entrega final.
+              Centralizamos cotización, documentación, booking marítimo o
+              aéreo, despacho aduanero y delivery. Tu operación arranca en un
+              email y termina con el cliente recibiendo la mercadería.
             </p>
           </RevealOnScroll>
 
@@ -218,11 +234,12 @@ export default function HomePage() {
               Servicios
             </span>
             <h2 className="mt-3 font-serif text-3xl font-bold text-navy-900 sm:text-4xl">
-              Cuatro verticales, una sola operación
+              Cuatro verticales, una sola red logística
             </h2>
             <p className="mt-3 text-slate-600">
-              Coordinamos importación, exportación, despacho aduanero y delivery
-              a lo largo de toda la cadena.
+              Combustible, alimentos, paquetería y carga general — cada vertical
+              con su propio expertise técnico, todas operadas desde la misma
+              plataforma.
             </p>
           </RevealOnScroll>
 
@@ -279,12 +296,12 @@ export default function HomePage() {
               Tracking
             </span>
             <h2 className="mt-3 font-serif text-3xl font-bold sm:text-5xl">
-              Tu carga, en tiempo real.
+              Saber dónde está tu carga, siempre.
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-white/80">
-              Ingresá tu número de orden, factura o booking CAT y te mostramos
-              exactamente dónde está tu contenedor, qué documentos ya emitimos
-              y cuándo llega al destino.
+              Con tu número de orden, factura o booking CAT te mostramos cada
+              hito del envío, la ubicación GPS en vivo del contenedor y la
+              fecha estimada de entrega al consignatario.
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
               <Link href="/tracking" className="btn-glass-primary">
