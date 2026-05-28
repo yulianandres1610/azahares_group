@@ -337,22 +337,28 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ───── CTA TRACKING — light, con imagen del tracking de fondo
-          (evita que el hero-bg navy se repita 2 veces en la misma página). */}
+      {/* ───── CTA TRACKING — light, con imagen mapa mundial con pins.
+          La imagen ya es muy clara (mapa punteado navy + pins + rutas
+          curvas sobre fondo blanco), así que solo necesitamos un overlay
+          sutil que asegure legibilidad del texto sin tapar los pins. */}
       <section className="relative isolate overflow-hidden bg-white py-16 sm:py-24 lg:py-28">
-        {/* Imagen de fondo */}
         <div className="pointer-events-none absolute inset-0">
           <Image
-            src="/images/tracking-hero.png"
+            src="/images/home-cta-worldmap.png"
             alt=""
             fill
             sizes="100vw"
             className="object-cover object-center"
           />
-          {/* Overlays — light tones para mantener consistencia con la
-              página /tracking y dar legibilidad al text navy. */}
-          <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-white/55 to-white/80" />
-          <div className="absolute inset-0 bg-gradient-to-r from-white/55 via-white/15 to-white/55" />
+          {/* Overlay radial centrado — abre un "halo" blanco detrás del
+              texto sin opacar el mapa de los bordes. */}
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "radial-gradient(ellipse 60% 70% at 50% 50%, rgba(255,255,255,0.85), rgba(255,255,255,0.35) 70%, rgba(255,255,255,0.15))",
+            }}
+          />
         </div>
 
         <div className="relative z-10 mx-auto max-w-5xl px-5 text-center sm:px-8 lg:px-12">
