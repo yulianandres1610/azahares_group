@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { Mail, MapPin, Phone } from "lucide-react";
-import { Logo } from "./Logo";
 
 const SERVICES = [
   { href: "/servicios#combustible", label: "Combustible · iso tanques" },
@@ -20,17 +19,8 @@ export function Footer() {
     <footer className="relative overflow-hidden bg-navy-900 text-white">
       <div className="absolute inset-0 hero-bg opacity-55" />
       <div className="relative mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
-        {/* ───── Top — logo + tagline únicos, centrados ───── */}
-        <div className="flex flex-col items-center border-b border-white/10 py-12 text-center sm:py-14">
-          <Logo whiteOnDark height={56} className="h-12 w-auto sm:h-14" />
-          <p className="mt-4 max-w-md text-xs leading-relaxed text-white/65 sm:text-sm">
-            Logística internacional · combustibles, alimentos y paquetería
-            con precios CIF puestos en destino.
-          </p>
-        </div>
-
-        {/* ───── Mid — grid de columnas (desktop) / acordeón visual (mobile) ───── */}
-        <div className="hidden gap-12 py-12 sm:grid sm:grid-cols-3">
+        {/* ───── Mid — grid de columnas (desktop) ───── */}
+        <div className="hidden gap-12 pt-14 pb-12 sm:grid sm:grid-cols-3">
           <div>
             <h4 className="text-[11px] font-bold uppercase tracking-[0.22em] text-white/55">
               Servicios
@@ -107,7 +97,7 @@ export function Footer() {
         </div>
 
         {/* ───── Mobile mid — contacto compacto inline ───── */}
-        <div className="block py-8 sm:hidden">
+        <div className="block pt-12 pb-8 sm:hidden">
           <div className="flex flex-col items-center gap-3 text-sm">
             <a
               href="tel:+13057140001"
