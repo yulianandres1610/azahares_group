@@ -88,11 +88,10 @@ export default function HomePage() {
   return (
     <>
       {/* ───── HERO ───── */}
-      {/* Padding ajustado por breakpoint:
-           - lg (MBP 14, ~982px alto): pt-28/pb-20 para que el hero entre completo.
-           - xl (Full HD ~1080px alto): pt-36/pb-28 + min-h para que la sección
-             ocupe el viewport entero y no deje un strip blanco antes de Features. */}
-      <section className="hero-bg hero-bg-noise relative isolate flex items-center overflow-hidden pt-28 pb-16 text-white sm:pt-32 sm:pb-20 lg:min-h-[calc(100vh-76px)] lg:pt-28 lg:pb-16 xl:min-h-[calc(100vh-88px)] xl:pt-24 xl:pb-20">
+      {/* Sin min-h forzado — el hero crece naturalmente al contenido,
+          evitando una franja navy vacía en el bottom cuando el contenido
+          es más chico que el viewport (Full HD especialmente). */}
+      <section className="hero-bg hero-bg-noise relative isolate overflow-hidden pt-28 pb-20 text-white sm:pt-32 sm:pb-24 lg:pt-32 lg:pb-28 xl:pt-36 xl:pb-32">
         <HeroOrbs />
         <div className="relative z-10 mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
           <div className="grid items-center gap-10 lg:grid-cols-[1.1fr_1fr] lg:gap-12 xl:gap-16">
@@ -169,36 +168,87 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ───── FEATURES STRIP ───── */}
-      <section className="bg-white py-14 sm:py-20 lg:py-24">
-        <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
-          <RevealOnScroll className="mb-10 text-center sm:mb-12">
-            <span className="text-[11px] font-bold uppercase tracking-[0.22em] text-navy-600 sm:text-xs">
+      {/* ───── FEATURES — diseño moderno con números + accents animados ───── */}
+      {/* bg-white→navy-50/50 gradient suave que conecta con la siguiente
+          sección (bg-navy-50/60) sin franja blanca residual. */}
+      <section className="relative overflow-hidden bg-gradient-to-b from-white via-white to-navy-50/40 py-16 sm:py-20 lg:py-24">
+        {/* Decorativo: gradiente radial sutil de fondo */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 opacity-60"
+          style={{
+            background:
+              "radial-gradient(ellipse 60% 50% at 10% 0%, rgba(29,58,138,0.06), transparent 60%), radial-gradient(ellipse 50% 50% at 90% 100%, rgba(29,58,138,0.05), transparent 60%)",
+          }}
+        />
+
+        <div className="relative mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
+          <RevealOnScroll className="mb-12 text-center sm:mb-14">
+            <span className="inline-flex items-center gap-2 rounded-full border border-navy-200 bg-white px-3 py-1 text-[10px] font-bold uppercase tracking-[0.22em] text-navy-700 shadow-[0_4px_18px_rgba(13,27,61,0.06)] sm:text-[11px]">
+              <span className="h-1.5 w-1.5 rounded-full bg-success-500" />
               Por qué Azahares
             </span>
-            <h2 className="mt-3 font-serif text-[1.75rem] font-bold leading-tight text-navy-900 sm:text-3xl lg:text-4xl">
-              Una sola operación, cero fricción
+            <h2 className="mt-4 font-serif text-[1.75rem] font-bold leading-tight text-navy-900 sm:text-3xl lg:text-[2.5rem]">
+              Una sola operación,{" "}
+              <span className="relative inline-block">
+                cero fricción
+                <span
+                  aria-hidden
+                  className="absolute -bottom-1 left-0 right-0 h-[3px] rounded-full bg-gradient-to-r from-navy-300 via-navy-500 to-navy-300"
+                />
+              </span>
             </h2>
-            <p className="mx-auto mt-3 max-w-2xl text-slate-600">
+            <p className="mx-auto mt-4 max-w-2xl text-[15px] leading-relaxed text-slate-600 sm:text-base">
               Centralizamos cotización, documentación, booking marítimo o
               aéreo, despacho aduanero y delivery. Tu operación arranca en un
               email y termina con el cliente recibiendo la mercadería.
             </p>
           </RevealOnScroll>
 
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className="grid gap-5 md:grid-cols-3 md:gap-6 lg:gap-8">
             {FEATURES.map((f, i) => (
-              <RevealOnScroll key={f.title} delay={i * 0.08}>
-                <div className="group h-full rounded-3xl border border-navy-100 bg-gradient-to-br from-white to-navy-50/40 p-7 transition hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(13,27,61,0.12)]">
-                  <div className="grid h-12 w-12 place-items-center rounded-2xl bg-navy-900 text-white shadow-[0_8px_20px_rgba(13,27,61,0.25)]">
-                    <f.icon className="h-6 w-6" strokeWidth={2.2} />
+              <RevealOnScroll key={f.title} delay={i * 0.1}>
+                <div className="group relative h-full overflow-hidden rounded-3xl border border-navy-100 bg-white p-7 transition-all duration-500 hover:-translate-y-2 hover:border-navy-200 hover:shadow-[0_24px_60px_-12px_rgba(13,27,61,0.22)] lg:p-8">
+                  {/* Hover accent — barra de gradient navy aparece arriba */}
+                  <div
+                    aria-hidden
+                    className="absolute inset-x-0 top-0 h-1 origin-left scale-x-0 bg-gradient-to-r from-navy-500 via-navy-700 to-navy-900 transition-transform duration-500 group-hover:scale-x-100"
+                  />
+
+                  {/* Número grande fantasma */}
+                  <div className="pointer-events-none absolute right-5 top-4 select-none font-serif text-7xl font-bold leading-none text-navy-900/[0.04] transition-colors duration-500 group-hover:text-navy-900/[0.08]">
+                    0{i + 1}
                   </div>
-                  <h3 className="mt-5 font-serif text-xl font-bold text-navy-900">
+
+                  {/* Icono — caja navy con glow al hover */}
+                  <div className="relative inline-grid h-14 w-14 place-items-center rounded-2xl bg-navy-900 text-white shadow-[0_10px_24px_rgba(13,27,61,0.28)] transition-all duration-500 group-hover:scale-110 group-hover:rotate-3 group-hover:shadow-[0_16px_36px_rgba(13,27,61,0.42)]">
+                    <f.icon className="h-6 w-6" strokeWidth={2.2} />
+                    {/* Pulse dot */}
+                    <span
+                      aria-hidden
+                      className="absolute -right-1 -top-1 h-3 w-3 rounded-full bg-success-500 ring-4 ring-white"
+                    />
+                  </div>
+
+                  <h3 className="relative mt-6 font-serif text-xl font-bold leading-tight text-navy-900 lg:text-[1.35rem]">
                     {f.title}
                   </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-slate-600">
+
+                  {/* Underline accent que crece al hover */}
+                  <div
+                    aria-hidden
+                    className="mt-2 h-0.5 w-8 origin-left bg-navy-300 transition-all duration-500 group-hover:w-16 group-hover:bg-navy-700"
+                  />
+
+                  <p className="relative mt-4 text-[14.5px] leading-relaxed text-slate-600">
                     {f.desc}
                   </p>
+
+                  {/* Read-more chevron que aparece al hover */}
+                  <div className="relative mt-5 inline-flex items-center gap-1 text-[11px] font-bold uppercase tracking-wider text-navy-700 opacity-0 transition-all duration-500 group-hover:opacity-100">
+                    <span>Saber más</span>
+                    <ArrowRight className="h-3 w-3 transition-transform duration-500 group-hover:translate-x-1" />
+                  </div>
                 </div>
               </RevealOnScroll>
             ))}
@@ -209,7 +259,7 @@ export default function HomePage() {
       {/* ───── SERVICES GRID ───── */}
       <section
         id="servicios"
-        className="relative overflow-hidden bg-navy-50/60 py-16 sm:py-24 lg:py-28"
+        className="relative overflow-hidden bg-navy-50/40 py-16 sm:py-24 lg:py-28"
       >
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-navy-300/60 to-transparent" />
         <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
