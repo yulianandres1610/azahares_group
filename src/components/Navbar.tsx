@@ -1,11 +1,20 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X, LogIn, Ship, Search, Package, Mail } from "lucide-react";
 import { env } from "@/lib/env";
 import { Logo } from "./Logo";
+
+/**
+ * Páginas cuyo hero es LIGHT (fondo blanco / claro). El navbar arranca
+ * en estilo sólido (logo navy + texto navy) en estas rutas desde el
+ * primer render, sin esperar al scroll — sino el logo blanco quedaba
+ * invisible sobre el fondo blanco.
+ */
+const LIGHT_HERO_ROUTES = new Set<string>(["/tracking"]);
 
 const NAV_LINKS: Array<{
   href: string;
@@ -20,8 +29,15 @@ const NAV_LINKS: Array<{
 ];
 
 export function Navbar() {
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+
+  // Solid = navbar con fondo blanco + logo navy. Lo aplicamos cuando:
+  //  - el user ya scrolleó (overlay sobre cualquier hero), O
+  //  - la ruta actual tiene hero light (tracking) y necesitamos contraste
+  //    desde el primer render.
+  const isSolid = scrolled || LIGHT_HERO_ROUTES.has(pathname ?? "");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -41,7 +57,7 @@ export function Navbar() {
     <header
       className={
         "fixed inset-x-0 top-0 z-50 transition-all duration-300 " +
-        (scrolled
+        (isSolid
           ? "bg-white/90 backdrop-blur-2xl shadow-[0_6px_28px_rgba(13,27,61,0.08)]"
           : "bg-transparent")
       }
@@ -49,7 +65,7 @@ export function Navbar() {
       <div className="mx-auto flex w-full max-w-[1400px] items-center justify-between gap-4 px-5 py-3 sm:px-8 lg:px-12 lg:py-4">
         <Link href="/" className="group flex shrink-0 items-center">
           <Logo
-            whiteOnDark={!scrolled}
+            whiteOnDark={!isSolid}
             height={56}
             className="h-12 w-auto transition-transform group-hover:scale-105 sm:h-14 lg:h-16"
           />
@@ -62,7 +78,7 @@ export function Navbar() {
               href={l.href}
               className={
                 "rounded-full px-5 py-2.5 text-sm font-semibold transition-colors " +
-                (scrolled
+                (isSolid
                   ? "text-navy-800 hover:bg-navy-50"
                   : "text-white/90 hover:bg-white/10")
               }
@@ -72,8 +88,13 @@ export function Navbar() {
           ))}
           <a
             href={env.loginUrl}
-            className="ml-3 btn-glass-primary text-sm"
-            style={{ padding: "0.6rem 1.4rem" }}
+            className={
+              "ml-3 text-sm " +
+              (isSolid
+                ? "inline-flex items-center gap-2 rounded-full bg-navy-900 px-5 py-2.5 font-bold text-white shadow-[0_8px_24px_rgba(13,27,61,0.25)] transition hover:-translate-y-0.5 hover:bg-navy-700"
+                : "btn-glass-primary")
+            }
+            style={isSolid ? undefined : { padding: "0.6rem 1.4rem" }}
           >
             <LogIn className="h-4 w-4" />
             Acceder
@@ -85,7 +106,7 @@ export function Navbar() {
           onClick={() => setOpen((v) => !v)}
           className={
             "grid h-11 w-11 place-items-center rounded-2xl transition lg:hidden " +
-            (scrolled
+            (isSolid
               ? "bg-navy-900 text-white shadow-[0_6px_18px_rgba(13,27,61,0.22)]"
               : "bg-white/15 text-white backdrop-blur-xl border border-white/25")
           }

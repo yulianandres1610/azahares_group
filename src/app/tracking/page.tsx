@@ -50,19 +50,17 @@ export default function TrackingPage() {
 
         <div className="relative z-10 mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
           {/* Headline centrado */}
-          <div className="mx-auto max-w-3xl text-center">
-            <span className="inline-flex items-center gap-2 rounded-full border border-navy-200 bg-white/85 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-navy-700 shadow-[0_4px_18px_rgba(13,27,61,0.08)] backdrop-blur sm:text-[11px]">
+          <div className="mx-auto max-w-2xl text-center">
+            <span className="inline-flex items-center gap-2 rounded-full border border-navy-200 bg-white/85 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.22em] text-navy-700 shadow-[0_4px_18px_rgba(13,27,61,0.08)] backdrop-blur sm:text-[11px]">
               <Ship className="h-3 w-3" />
-              Tracking público
+              Seguimiento de envíos
             </span>
-            <h1 className="mt-5 font-serif text-[2.5rem] font-bold leading-[1.05] tracking-tight text-navy-900 sm:text-5xl lg:text-[3.5rem]">
-              Tu envío,
-              <br />
-              <span className="text-navy-500">paso a paso.</span>
+            <h1 className="mt-5 font-serif text-[2.25rem] font-bold leading-[1.08] tracking-tight text-navy-900 sm:text-[2.75rem] lg:text-[3.25rem]">
+              Tracking de tu carga, en tiempo real
             </h1>
-            <p className="mx-auto mt-4 max-w-xl text-[15px] leading-relaxed text-navy-800/75 sm:text-base lg:text-lg">
-              Ingresá tu código y te mostramos cada hito del envío — desde la
-              cotización hasta la entrega al consignatario final.
+            <p className="mx-auto mt-4 max-w-lg text-[15px] leading-relaxed text-navy-800/70 sm:text-base">
+              Consultá el estado de tu envío con el número de orden, factura
+              o booking CAT. Datos GPS actualizados cada hora.
             </p>
           </div>
 
