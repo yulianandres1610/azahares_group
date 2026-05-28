@@ -35,8 +35,7 @@ const SERVICES = [
     description:
       "Gasolina, diésel y jet fuel exportados en iso tanques de 20 ft. Documentación BIS/EAR99 completa, BOL marítimo y certificados de calidad listos para Aduana.",
     cta: "Conocer más",
-    image:
-      "https://images.unsplash.com/photo-1592838064575-70ed626d3a0e?auto=format&fit=crop&w=2200&q=85",
+    image: "/images/service-combustible.png",
   },
   {
     id: "alimentos",
@@ -45,8 +44,7 @@ const SERVICES = [
     description:
       "Reefer y dry de 20 ft y 40 ft para víveres, productos refrigerados y secos. Cadena de frío certificada y manifiesto detallado por SKU.",
     cta: "Ver contenedores",
-    image:
-      "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=2200&q=85",
+    image: "/images/service-alimentos.png",
   },
   {
     id: "courier",
@@ -55,8 +53,7 @@ const SERVICES = [
     description:
       "Servicio puerta a puerta para envíos personales y comerciales con trazabilidad en vivo, tiempos comprometidos y delivery al consignatario final.",
     cta: "Solicitar envío",
-    image:
-      "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=2200&q=85",
+    image: "/images/service-courier.png",
   },
   {
     id: "logistica",
@@ -65,8 +62,7 @@ const SERVICES = [
     description:
       "Coordinación end-to-end — booking marítimo o aéreo, despacho aduanero, documentación BIS/EAR99 y última milla con red de partners verificados.",
     cta: "Hablar con ventas",
-    image:
-      "https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?auto=format&fit=crop&w=2200&q=85",
+    image: "/images/home-hero-logistics.png",
   },
 ];
 
@@ -238,7 +234,10 @@ export default function HomePage() {
                   id={s.id}
                   className="group relative overflow-hidden rounded-3xl bg-white shadow-[0_10px_30px_rgba(13,27,61,0.06)] transition hover:-translate-y-1 hover:shadow-[0_28px_60px_rgba(13,27,61,0.18)]"
                 >
-                  <div className="relative aspect-[16/9] overflow-hidden">
+                  {/* Aspect 5/4 — los renders nuevos son cuadrados (1254x1254).
+                      5/4 crop mínimo (8% top/bottom) que mantiene los elementos
+                      principales centrados visibles. */}
+                  <div className="relative aspect-[5/4] overflow-hidden">
                     <Image
                       src={s.image}
                       alt={s.title}
@@ -246,8 +245,8 @@ export default function HomePage() {
                       sizes="(max-width: 768px) 100vw, 50vw"
                       className="object-cover transition duration-[1.2s] group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-navy-900/85 via-navy-900/15 to-transparent" />
-                    <div className="absolute left-5 top-5 inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-white backdrop-blur">
+                    <div className="absolute inset-0 bg-gradient-to-t from-navy-900/85 via-navy-900/10 to-transparent" />
+                    <div className="absolute left-5 top-5 inline-flex items-center gap-2 rounded-full bg-white/20 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-white backdrop-blur-xl">
                       <s.icon className="h-3.5 w-3.5" />
                       Servicio
                     </div>

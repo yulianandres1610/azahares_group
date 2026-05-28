@@ -27,8 +27,7 @@ const SECTIONS = [
     id: "combustible",
     eyebrow: "Energía",
     title: "Combustible en iso tanques",
-    image:
-      "https://images.unsplash.com/photo-1605281317010-fe5ffe798166?auto=format&fit=crop&w=2200&q=85",
+    image: "/images/service-combustible.png",
     intro:
       "Exportamos gasolina regular y premium, diésel y kerosene/jet fuel en iso tanques de 20 ft a destinos internacionales con documentación BIS/EAR99 completa.",
     bullets: [
@@ -42,8 +41,7 @@ const SECTIONS = [
     id: "alimentos",
     eyebrow: "Alimentos",
     title: "Contenedores de alimentos",
-    image:
-      "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=2200&q=85",
+    image: "/images/service-alimentos.png",
     intro:
       "Coordinamos envíos de víveres, productos refrigerados y alimentos secos. Contenedores reefer y dry de 20 ft y 40 ft con manifiesto detallado por línea.",
     bullets: [
@@ -57,8 +55,7 @@ const SECTIONS = [
     id: "courier",
     eyebrow: "Paquetería",
     title: "Courier puerta a puerta",
-    image:
-      "https://images.unsplash.com/photo-1607082352121-fa243f3dde32?auto=format&fit=crop&w=2200&q=85",
+    image: "/images/service-courier.png",
     intro:
       "Servicio de courier para envíos personales y comerciales. Recolección en origen, transporte por aire o consolidado marítimo y entrega al consignatario.",
     bullets: [
@@ -72,8 +69,7 @@ const SECTIONS = [
     id: "logistica",
     eyebrow: "Logística integral",
     title: "Coordinación end-to-end",
-    image:
-      "https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?auto=format&fit=crop&w=2200&q=85",
+    image: "/images/home-hero-logistics.png",
     intro:
       "Si necesitás importar o exportar cargas distintas, también las movemos. Coordinamos FCL/LCL, despacho aduanero, documentación y delivery final en cualquier destino.",
     bullets: [
