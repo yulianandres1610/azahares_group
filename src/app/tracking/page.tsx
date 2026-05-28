@@ -34,8 +34,11 @@ export default function TrackingPage() {
             priority
             className="object-cover object-center"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-white/55 to-white/85" />
-          <div className="absolute inset-0 bg-gradient-to-r from-white/65 via-white/20 to-white/65" />
+          {/* Overlays suaves — la nueva imagen tiene mejor contraste y
+              motivos más visibles (ship + plane + truck + mapa con pins),
+              bajamos la opacidad para que se aprecie sin tapar. */}
+          <div className="absolute inset-0 bg-gradient-to-b from-white/20 via-white/40 to-white/75" />
+          <div className="absolute inset-0 bg-gradient-to-r from-white/50 via-transparent to-white/50" />
         </div>
 
         <div className="relative z-10 mx-auto w-full max-w-[1400px] px-5 sm:px-8 lg:px-12">
