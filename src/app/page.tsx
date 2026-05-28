@@ -327,29 +327,53 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ───── CTA TRACKING ───── */}
-      <section className="relative isolate overflow-hidden py-16 sm:py-24 lg:py-28">
-        <div className="absolute inset-0 hero-bg" />
-        <HeroOrbs />
-        <div className="relative z-10 mx-auto max-w-5xl px-5 text-center text-white sm:px-8 lg:px-12">
+      {/* ───── CTA TRACKING — light, con imagen del tracking de fondo
+          (evita que el hero-bg navy se repita 2 veces en la misma página). */}
+      <section className="relative isolate overflow-hidden bg-white py-16 sm:py-24 lg:py-28">
+        {/* Imagen de fondo */}
+        <div className="pointer-events-none absolute inset-0">
+          <Image
+            src="/images/tracking-hero.png"
+            alt=""
+            fill
+            sizes="100vw"
+            className="object-cover object-center"
+          />
+          {/* Overlays — light tones para mantener consistencia con la
+              página /tracking y dar legibilidad al text navy. */}
+          <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-white/55 to-white/80" />
+          <div className="absolute inset-0 bg-gradient-to-r from-white/55 via-white/15 to-white/55" />
+        </div>
+
+        <div className="relative z-10 mx-auto max-w-5xl px-5 text-center sm:px-8 lg:px-12">
           <RevealOnScroll>
-            <span className="text-[11px] font-bold uppercase tracking-[0.22em] text-white/75 sm:text-xs">
+            <span className="inline-flex items-center gap-2 rounded-full border border-navy-200 bg-white px-3 py-1 text-[10px] font-bold uppercase tracking-[0.22em] text-navy-700 shadow-[0_4px_18px_rgba(13,27,61,0.08)] sm:text-[11px]">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inset-0 animate-ping rounded-full bg-success-500 opacity-75" />
+                <span className="relative h-2 w-2 rounded-full bg-success-500" />
+              </span>
               Tracking
             </span>
-            <h2 className="mt-3 font-serif text-[1.75rem] font-bold leading-tight sm:text-4xl lg:text-5xl">
+            <h2 className="mt-4 font-serif text-[1.85rem] font-bold leading-tight text-navy-900 sm:text-[2.25rem] lg:text-[2.75rem]">
               Saber dónde está tu carga, siempre.
             </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-white/80">
+            <p className="mx-auto mt-4 max-w-2xl text-[15px] leading-relaxed text-navy-800/75 sm:text-base">
               Con tu número de orden, factura o booking CAT te mostramos cada
               hito del envío, la ubicación GPS en vivo del contenedor y la
               fecha estimada de entrega al consignatario.
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
-              <Link href="/tracking" className="btn-glass-primary">
+              <Link
+                href="/tracking"
+                className="inline-flex items-center gap-2 rounded-full border-2 border-navy-900 bg-navy-900 px-7 py-3 text-sm font-bold text-white shadow-[0_10px_30px_rgba(13,27,61,0.28)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-white hover:text-navy-900"
+              >
                 <Search className="h-4 w-4" />
                 Rastrear ahora
               </Link>
-              <Link href="/contacto" className="btn-glass-ghost">
+              <Link
+                href="/contacto"
+                className="inline-flex items-center gap-2 rounded-full border-2 border-navy-900 bg-transparent px-7 py-3 text-sm font-bold text-navy-900 transition-all duration-200 hover:-translate-y-0.5 hover:bg-navy-900 hover:text-white"
+              >
                 Hablar con un ejecutivo
               </Link>
             </div>
