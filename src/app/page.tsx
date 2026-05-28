@@ -152,22 +152,26 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Hero visual — imagen real con overlay liquid glass y
-                service pills. Aspect ratio horizontal (5:4) en desktop
-                para que el hero entero entre en la altura de MBP 14"
-                sin scroll. Aspect 4:3 en mobile mantiene equilibrio. */}
-            <div className="relative mx-auto w-full max-w-[520px] lg:max-w-[560px] xl:max-w-none">
+            {/* Hero visual — render compuesto custom de Azahares con barco
+                contenedor, ISO tank, reefer con alimentos, truck y avión
+                sobre mapa mundial con location pins. Encaja navy + blanco
+                con la identidad visual de la marca. Aspect 4:3 mobile,
+                5:4 sm+ para mantener la altura del hero contenida en MBP
+                14" sin forzar scroll. */}
+            <div className="relative mx-auto w-full max-w-[520px] lg:max-w-[560px] xl:max-w-[640px]">
               <div className="glass-panel-strong relative overflow-hidden rounded-[28px] p-3">
-                <div className="relative aspect-[4/3] overflow-hidden rounded-2xl sm:aspect-[5/4]">
+                <div className="relative aspect-[16/9] overflow-hidden rounded-2xl sm:aspect-[16/10]">
                   <Image
-                    src="https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?auto=format&fit=crop&w=1800&q=88"
-                    alt="Contenedores apilados en puerto internacional"
+                    src="/images/home-hero-logistics.png"
+                    alt="Logística internacional Azahares — barco, ISO tank, reefer y avión cargo sobre red mundial"
                     fill
                     sizes="(max-width: 640px) 90vw, (max-width: 1024px) 70vw, 45vw"
                     priority
                     className="object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-navy-900/85 via-navy-900/10 to-transparent" />
+                  {/* Overlay sutil — la imagen ya es navy oscura, solo
+                      reforzamos el bottom para legibilidad de los pills. */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-navy-900/70 via-transparent to-transparent" />
                   <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5">
                     <div className="grid grid-cols-3 gap-2.5">
                       <ServicePill icon={Fuel} label="Combustible" />
