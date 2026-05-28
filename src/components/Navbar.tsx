@@ -86,15 +86,18 @@ export function Navbar() {
               {l.label}
             </Link>
           ))}
+          {/* Botón Acceder con borde-2 definido siempre, en ambos estados.
+              Cuando isSolid: borde navy + bg navy → hover invierte a outlined.
+              Cuando transparent: borde blanco + bg transparente → hover llena
+              con white. Look outlined moderno consistente con los CTAs del hero. */}
           <a
             href={env.loginUrl}
             className={
-              "ml-3 text-sm " +
+              "ml-3 inline-flex items-center gap-2 rounded-full border-2 px-5 py-2.5 text-sm font-bold transition-all duration-200 hover:-translate-y-0.5 " +
               (isSolid
-                ? "inline-flex items-center gap-2 rounded-full bg-navy-900 px-5 py-2.5 font-bold text-white shadow-[0_8px_24px_rgba(13,27,61,0.25)] transition hover:-translate-y-0.5 hover:bg-navy-700"
-                : "btn-glass-primary")
+                ? "border-navy-900 bg-navy-900 text-white shadow-[0_8px_24px_rgba(13,27,61,0.28)] hover:border-navy-900 hover:bg-white hover:text-navy-900 hover:shadow-[0_10px_28px_rgba(13,27,61,0.18)]"
+                : "border-white bg-white text-navy-900 shadow-[0_8px_24px_rgba(13,27,61,0.28)] hover:bg-transparent hover:text-white")
             }
-            style={isSolid ? undefined : { padding: "0.6rem 1.4rem" }}
           >
             <LogIn className="h-4 w-4" />
             Acceder

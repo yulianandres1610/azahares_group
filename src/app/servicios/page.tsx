@@ -69,7 +69,7 @@ const SECTIONS = [
     id: "logistica",
     eyebrow: "Logística integral",
     title: "Coordinación end-to-end",
-    image: "/images/home-hero-logistics.png",
+    image: "/images/service-logistica.png",
     intro:
       "Si necesitás importar o exportar cargas distintas, también las movemos. Coordinamos FCL/LCL, despacho aduanero, documentación y delivery final en cualquier destino.",
     bullets: [

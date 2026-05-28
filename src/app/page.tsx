@@ -62,7 +62,7 @@ const SERVICES = [
     description:
       "Coordinación end-to-end — booking marítimo o aéreo, despacho aduanero, documentación BIS/EAR99 y última milla con red de partners verificados.",
     cta: "Hablar con ventas",
-    image: "/images/home-hero-logistics.png",
+    image: "/images/service-logistica.png",
   },
 ];
 
@@ -168,90 +168,94 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ───── FEATURES — diseño moderno con números + accents animados ───── */}
-      {/* bg-white→navy-50/50 gradient suave que conecta con la siguiente
-          sección (bg-navy-50/60) sin franja blanca residual. */}
+      {/* ───── FEATURES — bento layout moderno ─────
+          Card grande feature destacada a la izquierda + 2 cards
+          apiladas a la derecha. Asimétrico, sin grid uniforme aburrido,
+          con micro-interacciones y profundidad. */}
       <section className="relative overflow-hidden bg-gradient-to-b from-white via-white to-navy-50/40 py-16 sm:py-20 lg:py-24">
-        {/* Decorativo: gradiente radial sutil de fondo */}
+        {/* Decorativos de fondo */}
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-0 opacity-60"
+          className="pointer-events-none absolute inset-0 opacity-70"
           style={{
             background:
-              "radial-gradient(ellipse 60% 50% at 10% 0%, rgba(29,58,138,0.06), transparent 60%), radial-gradient(ellipse 50% 50% at 90% 100%, rgba(29,58,138,0.05), transparent 60%)",
+              "radial-gradient(ellipse 60% 50% at 10% 0%, rgba(29,58,138,0.08), transparent 60%), radial-gradient(ellipse 50% 50% at 90% 100%, rgba(29,58,138,0.06), transparent 60%)",
           }}
         />
+        {/* Grid pattern decorativo top-right */}
+        <svg
+          aria-hidden
+          className="pointer-events-none absolute right-0 top-0 h-72 w-72 opacity-[0.07]"
+          viewBox="0 0 100 100"
+        >
+          <defs>
+            <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
+              <path d="M 10 0 L 0 0 0 10" fill="none" stroke="#0d1b3d" strokeWidth="0.5" />
+            </pattern>
+          </defs>
+          <rect width="100" height="100" fill="url(#grid)" />
+        </svg>
 
         <div className="relative mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
-          <RevealOnScroll className="mb-12 text-center sm:mb-14">
-            <span className="inline-flex items-center gap-2 rounded-full border border-navy-200 bg-white px-3 py-1 text-[10px] font-bold uppercase tracking-[0.22em] text-navy-700 shadow-[0_4px_18px_rgba(13,27,61,0.06)] sm:text-[11px]">
-              <span className="h-1.5 w-1.5 rounded-full bg-success-500" />
+          {/* ── Header section ── */}
+          <RevealOnScroll className="mb-12 text-center sm:mb-16">
+            <span className="inline-flex items-center gap-2 rounded-full border border-navy-200 bg-white px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-[0.22em] text-navy-700 shadow-[0_4px_18px_rgba(13,27,61,0.08)] sm:text-[11px]">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inset-0 animate-ping rounded-full bg-success-500 opacity-75" />
+                <span className="relative h-2 w-2 rounded-full bg-success-500" />
+              </span>
               Por qué Azahares
             </span>
-            <h2 className="mt-4 font-serif text-[1.75rem] font-bold leading-tight text-navy-900 sm:text-3xl lg:text-[2.5rem]">
+            <h2 className="mt-5 font-serif text-[1.85rem] font-bold leading-[1.1] text-navy-900 sm:text-[2.25rem] lg:text-[2.75rem]">
               Una sola operación,{" "}
-              <span className="relative inline-block">
+              <span className="relative inline-block whitespace-nowrap">
                 cero fricción
-                <span
+                <svg
                   aria-hidden
-                  className="absolute -bottom-1 left-0 right-0 h-[3px] rounded-full bg-gradient-to-r from-navy-300 via-navy-500 to-navy-300"
-                />
+                  viewBox="0 0 200 12"
+                  className="absolute -bottom-2 left-0 right-0 h-2 w-full"
+                  preserveAspectRatio="none"
+                >
+                  <path
+                    d="M 0 6 Q 50 0, 100 6 T 200 6"
+                    stroke="url(#stroke-grad)"
+                    strokeWidth="3"
+                    fill="none"
+                    strokeLinecap="round"
+                  />
+                  <defs>
+                    <linearGradient id="stroke-grad" x1="0" x2="1">
+                      <stop offset="0%" stopColor="#8caadb" />
+                      <stop offset="50%" stopColor="#1d3a8a" />
+                      <stop offset="100%" stopColor="#8caadb" />
+                    </linearGradient>
+                  </defs>
+                </svg>
               </span>
             </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-[15px] leading-relaxed text-slate-600 sm:text-base">
+            <p className="mx-auto mt-5 max-w-2xl text-[15px] leading-relaxed text-slate-600 sm:text-base">
               Centralizamos cotización, documentación, booking marítimo o
               aéreo, despacho aduanero y delivery. Tu operación arranca en un
               email y termina con el cliente recibiendo la mercadería.
             </p>
           </RevealOnScroll>
 
-          <div className="grid gap-5 md:grid-cols-3 md:gap-6 lg:gap-8">
-            {FEATURES.map((f, i) => (
-              <RevealOnScroll key={f.title} delay={i * 0.1}>
-                <div className="group relative h-full overflow-hidden rounded-3xl border border-navy-100 bg-white p-7 transition-all duration-500 hover:-translate-y-2 hover:border-navy-200 hover:shadow-[0_24px_60px_-12px_rgba(13,27,61,0.22)] lg:p-8">
-                  {/* Hover accent — barra de gradient navy aparece arriba */}
-                  <div
-                    aria-hidden
-                    className="absolute inset-x-0 top-0 h-1 origin-left scale-x-0 bg-gradient-to-r from-navy-500 via-navy-700 to-navy-900 transition-transform duration-500 group-hover:scale-x-100"
-                  />
+          {/* ── Bento grid ── */}
+          <div className="grid gap-5 lg:grid-cols-12 lg:gap-6">
+            {/* Feature destacada (col-7) — Precio CIF */}
+            <RevealOnScroll className="lg:col-span-7" delay={0.05}>
+              <FeatureCardLarge feature={FEATURES[0]} index={1} />
+            </RevealOnScroll>
 
-                  {/* Número grande fantasma */}
-                  <div className="pointer-events-none absolute right-5 top-4 select-none font-serif text-7xl font-bold leading-none text-navy-900/[0.04] transition-colors duration-500 group-hover:text-navy-900/[0.08]">
-                    0{i + 1}
-                  </div>
-
-                  {/* Icono — caja navy con glow al hover */}
-                  <div className="relative inline-grid h-14 w-14 place-items-center rounded-2xl bg-navy-900 text-white shadow-[0_10px_24px_rgba(13,27,61,0.28)] transition-all duration-500 group-hover:scale-110 group-hover:rotate-3 group-hover:shadow-[0_16px_36px_rgba(13,27,61,0.42)]">
-                    <f.icon className="h-6 w-6" strokeWidth={2.2} />
-                    {/* Pulse dot */}
-                    <span
-                      aria-hidden
-                      className="absolute -right-1 -top-1 h-3 w-3 rounded-full bg-success-500 ring-4 ring-white"
-                    />
-                  </div>
-
-                  <h3 className="relative mt-6 font-serif text-xl font-bold leading-tight text-navy-900 lg:text-[1.35rem]">
-                    {f.title}
-                  </h3>
-
-                  {/* Underline accent que crece al hover */}
-                  <div
-                    aria-hidden
-                    className="mt-2 h-0.5 w-8 origin-left bg-navy-300 transition-all duration-500 group-hover:w-16 group-hover:bg-navy-700"
-                  />
-
-                  <p className="relative mt-4 text-[14.5px] leading-relaxed text-slate-600">
-                    {f.desc}
-                  </p>
-
-                  {/* Read-more chevron que aparece al hover */}
-                  <div className="relative mt-5 inline-flex items-center gap-1 text-[11px] font-bold uppercase tracking-wider text-navy-700 opacity-0 transition-all duration-500 group-hover:opacity-100">
-                    <span>Saber más</span>
-                    <ArrowRight className="h-3 w-3 transition-transform duration-500 group-hover:translate-x-1" />
-                  </div>
-                </div>
+            {/* Sub-features (col-5) — apiladas */}
+            <div className="grid gap-5 lg:col-span-5">
+              <RevealOnScroll delay={0.15}>
+                <FeatureCardSmall feature={FEATURES[1]} index={2} />
               </RevealOnScroll>
-            ))}
+              <RevealOnScroll delay={0.25}>
+                <FeatureCardSmall feature={FEATURES[2]} index={3} />
+              </RevealOnScroll>
+            </div>
           </div>
         </div>
       </section>
@@ -356,3 +360,191 @@ export default function HomePage() {
   );
 }
 
+// ============================================================================
+// Bento Feature Cards
+// ============================================================================
+
+type FeatureItem = (typeof FEATURES)[number];
+
+/**
+ * Card grande destacada del bento — col-span-7 en desktop. Usa la primera
+ * feature (Precio CIF cerrado) como hero del bloque "Por qué Azahares".
+ * Layout split: visual a la derecha + contenido a la izquierda.
+ */
+function FeatureCardLarge({
+  feature,
+  index,
+}: {
+  feature: FeatureItem;
+  index: number;
+}) {
+  const Icon = feature.icon;
+  return (
+    <div className="group relative h-full overflow-hidden rounded-3xl border border-navy-100 bg-white p-7 transition-all duration-500 hover:-translate-y-2 hover:border-navy-200 hover:shadow-[0_28px_70px_-12px_rgba(13,27,61,0.25)] sm:p-8 lg:p-10">
+      {/* Top accent bar */}
+      <div
+        aria-hidden
+        className="absolute inset-x-0 top-0 h-1 origin-left scale-x-0 bg-gradient-to-r from-navy-500 via-navy-700 to-navy-900 transition-transform duration-500 group-hover:scale-x-100"
+      />
+
+      {/* Gradient orb decorative */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -right-20 -top-20 h-72 w-72 rounded-full bg-gradient-to-br from-navy-100/60 to-transparent blur-3xl transition-opacity duration-700 group-hover:opacity-100 opacity-70"
+      />
+
+      <div className="relative grid gap-8 sm:grid-cols-[1.2fr_1fr] sm:items-center">
+        <div>
+          {/* Step pill */}
+          <div className="inline-flex items-center gap-2 rounded-full border border-navy-200 bg-navy-50/60 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-navy-700">
+            <span className="font-mono tabular-nums">0{index}</span>
+            <span className="h-1 w-1 rounded-full bg-navy-400" />
+            <span>Diferencial principal</span>
+          </div>
+
+          {/* Icon + title */}
+          <div className="mt-5 flex items-start gap-4">
+            <div className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-navy-900 text-white shadow-[0_10px_24px_rgba(13,27,61,0.28)] transition-all duration-500 group-hover:scale-110 group-hover:rotate-3 sm:h-16 sm:w-16">
+              <Icon className="h-6 w-6 sm:h-7 sm:w-7" strokeWidth={2.2} />
+            </div>
+            <div className="min-w-0">
+              <h3 className="font-serif text-[1.4rem] font-bold leading-tight text-navy-900 sm:text-[1.65rem]">
+                {feature.title}
+              </h3>
+              <div
+                aria-hidden
+                className="mt-2 h-0.5 w-10 origin-left bg-navy-300 transition-all duration-500 group-hover:w-20 group-hover:bg-navy-700"
+              />
+            </div>
+          </div>
+
+          <p className="mt-5 text-[15px] leading-relaxed text-slate-600 sm:text-[15.5px]">
+            {feature.desc}
+          </p>
+
+          {/* Checklist de items que SÍ están incluidos en CIF */}
+          <ul className="mt-6 grid grid-cols-2 gap-2 text-[12px] sm:gap-x-4">
+            {[
+              "Flete marítimo/aéreo",
+              "Despacho aduanero",
+              "Documentación",
+              "Última milla",
+            ].map((item) => (
+              <li
+                key={item}
+                className="flex items-center gap-2 text-navy-800"
+              >
+                <CheckCircle2
+                  className="h-3.5 w-3.5 shrink-0 text-success-500"
+                  strokeWidth={2.5}
+                />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Visual — cotización mockup */}
+        <div className="relative">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -inset-4 -z-10 rounded-3xl bg-gradient-to-br from-navy-100/30 to-navy-200/20 blur-2xl"
+          />
+          <div className="rounded-2xl border border-navy-100 bg-gradient-to-br from-white to-navy-50/50 p-5 shadow-[0_18px_44px_rgba(13,27,61,0.08)] transition-transform duration-500 group-hover:-rotate-1">
+            <div className="text-[9px] font-bold uppercase tracking-wider text-navy-500">
+              Cotización · COT-25-0001
+            </div>
+            <div className="mt-3 space-y-2 text-[11px]">
+              {[
+                { l: "FOB combustible", v: "$ 63,920" },
+                { l: "Flete marítimo", v: "$  5,300" },
+                { l: "THC + ISPD", v: "$  3,300" },
+                { l: "Seguro", v: "$    800" },
+              ].map((r) => (
+                <div
+                  key={r.l}
+                  className="flex items-baseline justify-between text-slate-600"
+                >
+                  <span>{r.l}</span>
+                  <span className="font-mono tabular-nums">{r.v}</span>
+                </div>
+              ))}
+            </div>
+            <div className="mt-4 rounded-xl bg-navy-900 px-4 py-3 text-white">
+              <div className="text-[9px] uppercase tracking-wider text-white/60">
+                Total CIF
+              </div>
+              <div className="mt-0.5 flex items-baseline justify-between">
+                <span className="font-mono text-xl font-bold tabular-nums">
+                  $ 73,320
+                </span>
+                <span className="rounded-full bg-success-500/20 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-success-300">
+                  Cerrado
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/**
+ * Card pequeña del bento — col-span-5 lado a lado. Una versión más
+ * compacta para las features secundarias.
+ */
+function FeatureCardSmall({
+  feature,
+  index,
+}: {
+  feature: FeatureItem;
+  index: number;
+}) {
+  const Icon = feature.icon;
+  return (
+    <div className="group relative h-full overflow-hidden rounded-3xl border border-navy-100 bg-white p-6 transition-all duration-500 hover:-translate-y-1.5 hover:border-navy-200 hover:shadow-[0_22px_55px_-12px_rgba(13,27,61,0.22)] sm:p-7">
+      {/* Top accent bar */}
+      <div
+        aria-hidden
+        className="absolute inset-x-0 top-0 h-1 origin-left scale-x-0 bg-gradient-to-r from-navy-500 via-navy-700 to-navy-900 transition-transform duration-500 group-hover:scale-x-100"
+      />
+
+      <div className="flex items-start gap-4">
+        <div className="relative">
+          <div className="grid h-12 w-12 place-items-center rounded-2xl bg-navy-900 text-white shadow-[0_10px_24px_rgba(13,27,61,0.28)] transition-all duration-500 group-hover:scale-110 group-hover:rotate-3">
+            <Icon className="h-5 w-5" strokeWidth={2.2} />
+          </div>
+          <span
+            aria-hidden
+            className="absolute -right-1 -top-1 h-3 w-3 rounded-full bg-success-500 ring-4 ring-white"
+          />
+        </div>
+        <div className="min-w-0 flex-1">
+          {/* Step number */}
+          <div className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-navy-500">
+            0{index} · Operación
+          </div>
+          <h3 className="mt-1 font-serif text-lg font-bold leading-tight text-navy-900 sm:text-xl">
+            {feature.title}
+          </h3>
+        </div>
+      </div>
+
+      <div
+        aria-hidden
+        className="mt-4 h-0.5 w-10 origin-left bg-navy-300 transition-all duration-500 group-hover:w-20 group-hover:bg-navy-700"
+      />
+
+      <p className="mt-3 text-[14px] leading-relaxed text-slate-600">
+        {feature.desc}
+      </p>
+
+      {/* Read-more chevron al hover */}
+      <div className="mt-4 inline-flex items-center gap-1 text-[11px] font-bold uppercase tracking-wider text-navy-700 opacity-0 transition-all duration-500 group-hover:opacity-100">
+        <span>Ver detalle</span>
+        <ArrowRight className="h-3 w-3 transition-transform duration-500 group-hover:translate-x-1" />
+      </div>
+    </div>
+  );
+}
