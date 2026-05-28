@@ -94,26 +94,29 @@ export default function HomePage() {
   return (
     <>
       {/* ───── HERO ───── */}
-      <section className="hero-bg hero-bg-noise relative isolate overflow-hidden pt-28 pb-20 text-white sm:pt-36 sm:pb-24 lg:pt-40 lg:pb-32">
+      {/* Padding lg ajustado a pt-28/pb-20 (era pt-40/pb-32) para que el
+          hero entre completo en la altura de un MacBook Pro 14" (982px de
+          viewport útil) sin scroll. xl mantiene el padding generoso. */}
+      <section className="hero-bg hero-bg-noise relative isolate overflow-hidden pt-28 pb-16 text-white sm:pt-32 sm:pb-20 lg:pt-28 lg:pb-20 xl:pt-36 xl:pb-28">
         <HeroOrbs />
         <div className="relative z-10 mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
-          <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_1fr] lg:gap-14 xl:gap-20">
+          <div className="grid items-center gap-10 lg:grid-cols-[1.1fr_1fr] lg:gap-12 xl:gap-16">
             <div className="text-center lg:text-left">
               <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-white/90 backdrop-blur sm:text-[11px]">
                 <Globe2 className="h-3 w-3" />
                 Logística internacional · CIF
               </span>
-              <h1 className="mt-5 font-serif text-[2.5rem] font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-[3.5rem] xl:text-[4.25rem]">
+              <h1 className="mt-5 font-serif text-[2.5rem] font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-[3rem] xl:text-[3.75rem] 2xl:text-[4.25rem]">
                 Logística sin fronteras,
                 <br />
                 <span className="text-white/70">precios cerrados en destino.</span>
               </h1>
-              <p className="mx-auto mt-5 max-w-xl text-[15px] leading-relaxed text-white/80 sm:text-base lg:mx-0 lg:text-lg">
+              <p className="mx-auto mt-4 max-w-xl text-[15px] leading-relaxed text-white/80 sm:mt-5 sm:text-base lg:mx-0 lg:text-[15.5px] xl:text-lg">
                 Coordinamos combustibles en iso tanques, contenedores de
                 alimentos, paquetería y cargas internacionales con documentación
                 completa, tracking satelital y precio CIF cerrado de antemano.
               </p>
-              <div className="mt-8 flex flex-wrap items-center justify-center gap-3 lg:justify-start">
+              <div className="mt-7 flex flex-wrap items-center justify-center gap-3 lg:justify-start">
                 <Link href="/tracking" className="btn-glass-primary">
                   <Search className="h-4 w-4" />
                   Rastrear envío
@@ -124,14 +127,16 @@ export default function HomePage() {
                 </Link>
               </div>
 
-              {/* Stats con contador animado */}
-              <div className="mx-auto mt-10 grid max-w-xl grid-cols-2 gap-2.5 sm:mt-12 sm:gap-3 md:grid-cols-4 lg:mx-0">
+              {/* Stats con contador animado — padding y typography ajustados
+                  para que la fila completa entre en la altura del hero en
+                  MBP 14" sin empujar el card derecho. */}
+              <div className="mx-auto mt-8 grid max-w-xl grid-cols-2 gap-2.5 sm:mt-10 sm:gap-3 md:grid-cols-4 lg:mx-0 xl:mt-12">
                 {STATS.map((s) => (
                   <div
                     key={s.label}
-                    className="glass-panel rounded-2xl px-3 py-3.5 text-center sm:py-4"
+                    className="glass-panel rounded-2xl px-3 py-3 text-center sm:py-3.5 xl:py-4"
                   >
-                    <div className="font-serif text-[1.65rem] font-bold leading-tight text-white sm:text-3xl">
+                    <div className="font-serif text-[1.5rem] font-bold leading-tight text-white sm:text-[1.65rem] xl:text-3xl">
                       <AnimatedCounter
                         value={s.value}
                         prefix={s.prefix}
@@ -148,12 +153,12 @@ export default function HomePage() {
             </div>
 
             {/* Hero visual — imagen real con overlay liquid glass y
-                service pills. Aspect ratio responsive: más cuadrado en
-                mobile para no ocupar pantalla completa, vertical en
-                desktop para acompañar el copy. */}
-            <div className="relative mx-auto w-full max-w-[520px] lg:max-w-none">
+                service pills. Aspect ratio horizontal (5:4) en desktop
+                para que el hero entero entre en la altura de MBP 14"
+                sin scroll. Aspect 4:3 en mobile mantiene equilibrio. */}
+            <div className="relative mx-auto w-full max-w-[520px] lg:max-w-[560px] xl:max-w-none">
               <div className="glass-panel-strong relative overflow-hidden rounded-[28px] p-3">
-                <div className="relative aspect-[4/3] overflow-hidden rounded-2xl sm:aspect-[5/4] lg:aspect-[4/5]">
+                <div className="relative aspect-[4/3] overflow-hidden rounded-2xl sm:aspect-[5/4]">
                   <Image
                     src="https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?auto=format&fit=crop&w=1800&q=88"
                     alt="Contenedores apilados en puerto internacional"
