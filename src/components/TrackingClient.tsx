@@ -145,7 +145,7 @@ function TrackingHeader({ data }: { data: PublicTrackingResponse }) {
       <div className="hero-bg p-6 text-white sm:p-8">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
-            <span className="text-[11px] font-bold uppercase tracking-[0.22em] text-amber-300">
+            <span className="text-[11px] font-bold uppercase tracking-[0.22em] text-white/75">
               Estado actual
             </span>
             <h3 className="mt-2 font-serif text-2xl font-bold sm:text-3xl">
@@ -166,7 +166,7 @@ function TrackingHeader({ data }: { data: PublicTrackingResponse }) {
             </div>
             {data.bookingNumber && (
               <div className="mt-1 inline-flex items-center gap-1 rounded-full bg-white/15 px-2 py-0.5 text-[11px] font-bold backdrop-blur">
-                <ShipWheel className="h-3 w-3 text-amber-300" />
+                <ShipWheel className="h-3 w-3" />
                 {data.bookingNumber}
               </div>
             )}
@@ -177,14 +177,14 @@ function TrackingHeader({ data }: { data: PublicTrackingResponse }) {
         <div className="mt-6">
           <div className="flex items-baseline justify-between text-[11px] font-bold uppercase tracking-wider">
             <span className="text-white/70">Avance del envío</span>
-            <span className="text-amber-300">{pct}%</span>
+            <span className="text-white">{pct}%</span>
           </div>
           <div className="mt-2 h-2 overflow-hidden rounded-full bg-white/15">
             <motion.div
               initial={{ width: 0 }}
               animate={{ width: `${pct}%` }}
               transition={{ duration: 1.2, ease: "easeOut" }}
-              className="h-full rounded-full bg-gradient-to-r from-amber-300 to-amber-500"
+              className="h-full rounded-full bg-gradient-to-r from-white/70 to-white"
             />
           </div>
         </div>
@@ -233,7 +233,7 @@ function TrackingTimeline({ timeline }: { timeline: TimelineEvent[] }) {
                   className={
                     "absolute inset-0 rounded-full transition " +
                     (isDone
-                      ? "bg-amber-500/20"
+                      ? "bg-success-500/20"
                       : isCurrent
                         ? "bg-navy-100 animate-pulse"
                         : "bg-slate-100")
@@ -243,7 +243,7 @@ function TrackingTimeline({ timeline }: { timeline: TimelineEvent[] }) {
                   className={
                     "relative grid h-7 w-7 place-items-center rounded-full transition " +
                     (isDone
-                      ? "bg-amber-500 text-white shadow-[0_4px_12px_rgba(245,158,11,0.45)]"
+                      ? "bg-success-500 text-white shadow-[0_4px_12px_rgba(16,185,129,0.4)]"
                       : isCurrent
                         ? "bg-navy-700 text-white"
                         : "bg-slate-200 text-slate-400")
@@ -261,7 +261,7 @@ function TrackingTimeline({ timeline }: { timeline: TimelineEvent[] }) {
                   <div
                     className={
                       "absolute left-1/2 top-10 h-6 w-0.5 -translate-x-1/2 " +
-                      (isDone ? "bg-amber-400/50" : "bg-slate-200")
+                      (isDone ? "bg-success-400/50" : "bg-slate-200")
                     }
                   />
                 )}
@@ -287,7 +287,7 @@ function TrackingTimeline({ timeline }: { timeline: TimelineEvent[] }) {
                     {event.meta.catNumbers.map((cat) => (
                       <span
                         key={cat}
-                        className="rounded-full border border-amber-200 bg-amber-50 px-2 py-0.5 font-mono text-[10px] font-semibold tabular-nums text-amber-800"
+                        className="rounded-full border border-navy-200 bg-navy-50 px-2 py-0.5 font-mono text-[10px] font-semibold tabular-nums text-navy-800"
                       >
                         {cat}
                       </span>

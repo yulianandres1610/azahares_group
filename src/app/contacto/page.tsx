@@ -3,9 +3,9 @@ import { HeroOrbs } from "@/components/HeroOrbs";
 import { RevealOnScroll } from "@/components/RevealOnScroll";
 
 export const metadata = {
-  title: "Contacto · Azahares Group",
+  title: "Contacto · Azahares Import & Export",
   description:
-    "Hablá con un ejecutivo de Azahares Group. Cotizaciones CIF para importación y exportación a Cuba.",
+    "Hablá con un ejecutivo de Azahares. Cotizaciones CIF para importación y exportación internacional.",
 };
 
 const CHANNELS = [
@@ -32,13 +32,13 @@ const CHANNELS = [
 export default function ContactoPage() {
   return (
     <>
-      <section className="hero-bg hero-bg-noise relative isolate overflow-hidden pt-28 pb-16 text-white sm:pt-36 sm:pb-24">
+      <section className="hero-bg hero-bg-noise relative isolate overflow-hidden pt-32 pb-16 text-white sm:pt-40 sm:pb-24">
         <HeroOrbs />
-        <div className="relative z-10 mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] text-amber-300 backdrop-blur">
+        <div className="relative z-10 mx-auto max-w-[1500px] px-5 sm:px-8 lg:px-12">
+          <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] text-white/85 backdrop-blur">
             Contacto
           </span>
-          <h1 className="mt-5 font-serif text-4xl font-bold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
+          <h1 className="mt-5 font-serif text-4xl font-bold leading-tight tracking-tight sm:text-5xl lg:text-6xl xl:text-7xl">
             Conversemos.
           </h1>
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/80 sm:text-lg">
@@ -50,7 +50,7 @@ export default function ContactoPage() {
       </section>
 
       <section className="bg-slate-50 py-16 sm:py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-[1500px] px-5 sm:px-8 lg:px-12">
           <div className="grid gap-10 lg:grid-cols-[1fr_1.2fr]">
             <RevealOnScroll direction="right">
               <div className="space-y-6">
@@ -62,25 +62,25 @@ export default function ContactoPage() {
                     rel="noreferrer"
                     className="group flex items-center gap-4 rounded-3xl border border-navy-100 bg-white p-5 shadow-[0_8px_24px_rgba(13,27,61,0.06)] transition hover:-translate-y-1 hover:shadow-[0_18px_44px_rgba(13,27,61,0.14)]"
                   >
-                    <div className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-navy-900 text-amber-300 shadow-[0_8px_20px_rgba(13,27,61,0.25)]">
+                    <div className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-navy-900 text-white shadow-[0_8px_20px_rgba(13,27,61,0.25)]">
                       <c.icon className="h-5 w-5" />
                     </div>
                     <div>
                       <div className="text-[11px] font-bold uppercase tracking-wider text-slate-500">
                         {c.label}
                       </div>
-                      <div className="mt-0.5 font-serif text-lg font-bold text-navy-900 transition group-hover:text-amber-600">
+                      <div className="mt-0.5 font-serif text-lg font-bold text-navy-900 transition group-hover:text-navy-700">
                         {c.value}
                       </div>
                     </div>
                   </a>
                 ))}
 
-                <div className="rounded-3xl border border-amber-200 bg-amber-50 p-5">
+                <div className="rounded-3xl border border-navy-100 bg-navy-50/60 p-5">
                   <div className="flex items-start gap-3">
-                    <MapPin className="mt-0.5 h-5 w-5 text-amber-600" />
+                    <MapPin className="mt-0.5 h-5 w-5 text-navy-700" />
                     <div>
-                      <div className="text-[11px] font-bold uppercase tracking-wider text-amber-700">
+                      <div className="text-[11px] font-bold uppercase tracking-wider text-navy-700">
                         Oficina Miami
                       </div>
                       <div className="mt-1 font-semibold text-navy-900">
@@ -137,7 +137,7 @@ export default function ContactoPage() {
                   <textarea
                     name="mensaje"
                     rows={5}
-                    placeholder="Volumen, destino dentro de Cuba, fecha aproximada, etc."
+                    placeholder="Volumen, origen, destino, fecha aproximada, etc."
                     className="mt-2 w-full rounded-2xl border border-navy-200 bg-white px-4 py-3 text-sm text-navy-900 outline-none transition focus:border-navy-500 focus:shadow-[0_0_0_4px_rgba(29,58,138,0.1)]"
                   />
                 </div>
@@ -177,7 +177,7 @@ function Field({
     <div>
       <label className="block text-xs font-bold uppercase tracking-wider text-navy-700">
         {label}
-        {required && <span className="ml-1 text-amber-600">*</span>}
+        {required && <span className="ml-1 text-navy-500">*</span>}
       </label>
       <input
         type={type}

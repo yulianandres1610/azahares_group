@@ -4,14 +4,14 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Azahares Group · Importación y exportación a Cuba",
+  title: "Azahares Import & Export · Logística internacional",
   description:
-    "Grupo corporativo Azahares — combustibles en iso tanques, contenedores de alimentos, courier de paquetería. Todos los precios CIF puestos en destino.",
+    "Grupo corporativo dedicado a logística internacional — combustibles en iso tanques, contenedores de alimentos y courier de paquetería. Todos los precios CIF puestos en destino.",
   icons: { icon: "/logos/favicon.png" },
   openGraph: {
-    title: "Azahares Group",
+    title: "Azahares Import & Export",
     description:
-      "Logística marítima y aérea entre USA y Cuba — combustible, alimentos, paquetería.",
+      "Logística marítima y aérea internacional — combustible, alimentos, paquetería con precio CIF.",
     images: ["/logos/logo-square.png"],
     type: "website",
   },

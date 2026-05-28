@@ -16,8 +16,11 @@
   --color-navy-800: #112250;
   --color-navy-900: #0d1b3d;
 
-  --color-amber-400: #fbbf24;
-  --color-amber-500: #f59e0b;
+  /* Verde — solo confirmaciones / hechos / check marks. NUNCA decoración. */
+  --color-success-300: #6ee7b7;
+  --color-success-400: #34d399;
+  --color-success-500: #10b981;
+  --color-success-600: #059669;
 }
 
 * { box-sizing: border-box; }

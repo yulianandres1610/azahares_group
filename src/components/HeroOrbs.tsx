@@ -15,7 +15,7 @@ export function HeroOrbs() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1.2 }}
-        className="pointer-events-none absolute -left-32 top-10 h-[420px] w-[420px] rounded-full bg-amber-500/25 blur-3xl animate-float-slow"
+        className="pointer-events-none absolute -left-32 top-10 h-[420px] w-[420px] rounded-full bg-white/15 blur-3xl animate-float-slow"
       />
       <motion.div
         aria-hidden
