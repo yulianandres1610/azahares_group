@@ -11,6 +11,7 @@ const SERVICES = [
 const COMPANY = [
   { href: "/", label: "Inicio" },
   { href: "/tracking", label: "Tracking" },
+  { href: "/preguntas-frecuentes", label: "Preguntas frecuentes" },
   { href: "/contacto", label: "Contacto" },
 ];
 
@@ -119,6 +120,13 @@ export function Footer() {
             <span className="text-white/25">·</span>
             <Link href="/tracking" className="text-white/75 hover:text-white">
               Tracking
+            </Link>
+            <span className="text-white/25">·</span>
+            <Link
+              href="/preguntas-frecuentes"
+              className="text-white/75 hover:text-white"
+            >
+              FAQ
             </Link>
             <span className="text-white/25">·</span>
             <Link href="/contacto" className="text-white/75 hover:text-white">
