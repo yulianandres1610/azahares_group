@@ -1,11 +1,23 @@
 import { env } from "./env";
 
 /**
- * Cliente del API público de tracking. Mismas rutas que ya consume el
- * frontend operativo (azaharesfuel.com) — no duplicamos lógica de
- * computar la timeline; el backend devuelve los pasos ya armados.
+ * Cliente del API público de tracking — mismo endpoint que consume el
+ * frontend operativo azaharesfuel.com.
+ *
+ * El backend (`/public/tracking/:token`) acepta DOS formatos:
+ *  - trackingToken: 32 chars hex (UUID sin guiones, el único id opaco
+ *    que da datos del cliente — solo presente en el link del email).
+ *  - bookingNumber: `CAT` + dígitos (ej. CAT40104033) emitido por
+ *    Crowley.
+ *
+ * NO acepta order numbers (AZH-SO-XXXXXX) ni invoice numbers — la
+ * auditoría detectó enumeración secuencial y se eliminó ese lookup.
  */
 
+// ============================================================================
+// Tipos — espejo de backend/src/.../public-tracking.dto y
+// frontend/src/lib/api/types.ts (PublicTrackingResponse).
+// ============================================================================
 export type TimelineStep =
   | "order_placed"
   | "quote_sent"
@@ -24,27 +36,85 @@ export type TimelineStep =
   | "arrived_at_destination"
   | "delivered";
 
+export type ContainerStatus =
+  | "available"
+  | "in_transit"
+  | "in_vessel"
+  | "delivered"
+  | "maintenance";
+
+export interface TimelineMeta {
+  catNumbers?: string[];
+}
+
 export interface TimelineEvent {
   step: TimelineStep;
   at: string | null;
-  meta?: { catNumbers?: string[] };
+  meta?: TimelineMeta;
+}
+
+export interface PublicTrackingPing {
+  lat: number;
+  lng: number;
+  recordedAt: string;
+}
+
+export interface PublicTrackingContainer {
+  id: string;
+  containerNumber: string;
+  status: ContainerStatus;
+  productName: string | null;
+  poOrderNumber: string | null;
+  lastLocation: {
+    lat: number;
+    lng: number;
+    seenAt: string;
+    address: string | null;
+    speedMph: number | null;
+  } | null;
+  trail: PublicTrackingPing[];
+  originWarehouse: { id: string; name: string; lat: number; lng: number } | null;
+  destinationWarehouse: {
+    id: string;
+    name: string;
+    lat: number;
+    lng: number;
+  } | null;
+  milestones: {
+    loadedAt: string | null;
+    bolIssuedAt: string | null;
+    dispatchedAt: string | null;
+    arrivedAtDestinationAt: string | null;
+  };
+}
+
+export interface PublicTrackingPurchaseOrder {
+  id: string;
+  orderNumber: string;
+  containerNumber: string | null;
+  containerStatus: ContainerStatus | null;
+  timeline: TimelineEvent[];
 }
 
 export interface PublicTrackingResponse {
-  orderNumber: string;
-  bookingNumber: string | null;
-  clientLegalName: string | null;
-  productSummary: string | null;
-  fetchedAt: string;
-  timeline: TimelineEvent[];
-  containers?: unknown[];
-  purchaseOrders?: Array<{
-    id: string;
+  order: {
     orderNumber: string;
-    timeline: TimelineEvent[];
-  }>;
+    bookingNumber: string | null;
+    status: string;
+    createdAt: string;
+    portOfLoading: string | null;
+    portOfDischarge: string | null;
+  };
+  client: { legalName: string };
+  containers: PublicTrackingContainer[];
+  timeline: TimelineEvent[];
+  purchaseOrders: PublicTrackingPurchaseOrder[];
+  fetchedAt: string;
 }
 
+// ============================================================================
+// Errores
+// ============================================================================
 export class TrackingNotFoundError extends Error {
   constructor(public readonly query: string) {
     super(`No encontramos resultados para "${query}".`);
@@ -52,31 +122,24 @@ export class TrackingNotFoundError extends Error {
   }
 }
 
+// ============================================================================
+// Fetch
+// ============================================================================
 /**
- * Busca tracking público. El backend acepta varios formatos:
- *  - CAT (CATXXXXXX) → busca POs con ese CAT asignado
- *  - Booking number (CAT...) → ditto
- *  - Order number (AZH-SO-XXXXXX o WGT-SO-XXXXXX) → busca SO
- *  - Token alfanumérico largo → tracking link directo
- *
- * Probamos primero el endpoint de tracking por número (más permisivo).
- * Si el backend devuelve 404, lanzamos TrackingNotFoundError para que
- * la UI muestre un mensaje claro sin romper.
+ * GET /public/tracking/:token — devuelve el detalle completo (header,
+ * timeline, containers, purchaseOrders). `value` puede ser un
+ * trackingToken (32 hex) o un bookingNumber (CAT+dígitos).
  */
 export async function fetchPublicTracking(
   raw: string,
 ): Promise<PublicTrackingResponse> {
   const q = raw.trim();
-  if (!q) {
+  if (!q || q.length < 6) {
     throw new TrackingNotFoundError(raw);
   }
 
-  // El backend expone /public/tracking/by-number?q=XYZ con búsqueda
-  // unificada por order_number, booking_number o CAT. Si en algún
-  // momento cambia el shape del endpoint, lo ajustamos acá sin tocar
-  // la UI.
   const r = await fetch(
-    `${env.apiUrl}/public/tracking/by-number?q=${encodeURIComponent(q)}`,
+    `${env.apiUrl}/public/tracking/${encodeURIComponent(q)}`,
     { cache: "no-store" },
   );
 
@@ -92,46 +155,46 @@ export async function fetchPublicTracking(
   return (await r.json()) as PublicTrackingResponse;
 }
 
-/**
- * Etiquetas de cada step del timeline (mismo orden y nombres que la
- * versión operativa para que el cliente vea la misma narrativa donde
- * sea que abra el tracking).
- */
+// ============================================================================
+// Timeline metadata — etiquetas + descripciones de cada paso. Mismo
+// copy que el operativo para que el cliente vea idéntica narrativa.
+// ============================================================================
 export const TIMELINE_LABELS: Record<
   TimelineStep,
   { label: string; description: string }
 > = {
   order_placed: {
-    label: "Orden creada",
-    description: "Recibimos tu pedido y lo cargamos en el sistema.",
+    label: "Pedido registrado",
+    description: "Tu orden fue creada en el sistema.",
   },
   quote_sent: {
     label: "Cotización enviada",
-    description: "Te mandamos la cotización para que la revises.",
+    description: "Te enviamos la cotización con los precios y términos.",
   },
   quote_accepted: {
     label: "Cotización aceptada",
-    description: "Aceptaste la cotización — pasamos a facturación.",
+    description: "Confirmaste los términos y el sistema generó la factura.",
   },
   payment_received: {
     label: "Pago recibido",
-    description: "Recibimos el pago y lo verificamos.",
+    description: "Registramos tu pago y lo verificamos.",
   },
   invoice_issued: {
     label: "Factura emitida",
-    description: "Generamos la factura comercial de exportación.",
+    description: "Tu factura comercial ya está disponible.",
   },
   po_sent_to_supplier: {
-    label: "PO enviada al proveedor",
-    description: "Le pasamos la orden al proveedor de combustible.",
+    label: "Orden enviada al proveedor",
+    description: "Azahares envió la orden de compra al proveedor.",
   },
   supplier_accepted: {
-    label: "Proveedor aceptó",
-    description: "El proveedor confirmó la PO y empieza la operación.",
+    label: "Proveedor aceptó la orden",
+    description: "El proveedor confirmó la disponibilidad del producto.",
   },
   supplier_processing: {
-    label: "Procesando con el proveedor",
-    description: "Coordinación interna previa al booking marítimo.",
+    label: "Procesando por el proveedor",
+    description:
+      "El proveedor está preparando tu pedido y coordinando la operación interna.",
   },
   booking_requested: {
     label: "Booking solicitado a Crowley",
@@ -146,24 +209,24 @@ export const TIMELINE_LABELS: Record<
     description: "Se asignó el iso-tanque que va a transportar tu producto.",
   },
   container_loaded: {
-    label: "Contenedor cargado",
-    description: "El producto está cargado, sellado y listo para despacho.",
+    label: "Contenedor cargado y sellado",
+    description: "El producto fue cargado, sellado y está listo para despacho.",
   },
   bol_issued: {
     label: "Bill of Lading emitido",
     description: "El BOL fue emitido por la naviera.",
   },
   dispatched: {
-    label: "Despachado",
-    description: "El contenedor salió rumbo al puerto de destino.",
+    label: "En tránsito",
+    description: "El contenedor salió del puerto de origen.",
   },
   arrived_at_destination: {
-    label: "Arribó al destino",
+    label: "Llegó al destino",
     description: "El contenedor llegó al puerto de destino.",
   },
   delivered: {
     label: "Entregado",
-    description: "Tu pedido fue entregado al consignatario final.",
+    description: "El producto fue entregado a destino final.",
   },
 };
 
@@ -186,6 +249,31 @@ export const TIMELINE_ORDER: TimelineStep[] = [
   "delivered",
 ];
 
+// ============================================================================
+// Helpers
+// ============================================================================
+export const STATUS_LABEL: Record<ContainerStatus, string> = {
+  available: "En yarda",
+  in_transit: "En tránsito",
+  in_vessel: "En barco",
+  delivered: "Entregado",
+  maintenance: "Mantenimiento",
+};
+
+export const STATUS_COLOR: Record<ContainerStatus, [string, string]> = {
+  available: ["#10b981", "#047857"],
+  in_transit: ["#1d4ed8", "#1e3a8a"],
+  in_vessel: ["#1e3a8a", "#0d1b3d"],
+  delivered: ["#10b981", "#047857"],
+  maintenance: ["#0d1b3d", "#0a1430"],
+};
+
+/**
+ * Índice del último step done (con timestamp). -1 si nada está done.
+ * Todo step antes de este índice cuenta como done implícito aunque su
+ * `at` sea null — esto evita que un step intermedio sin timestamp
+ * aparezca "en curso" cuando ya hay actividad posterior.
+ */
 export function computeLastDoneIdx(timeline: TimelineEvent[]): number {
   for (let i = timeline.length - 1; i >= 0; i--) {
     if (timeline[i].at) return i;
