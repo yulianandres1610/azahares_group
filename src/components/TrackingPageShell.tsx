@@ -40,10 +40,10 @@ export function TrackingPageShell() {
 
     // Mínimo visible del loader. El fetch suele completar en <500 ms y
     // el ShipLoader animado queda subliminal — forzamos un piso de
-    // 1.4 s para que el usuario perciba la transición "buscando → te
-    // muestro el resultado". Si el fetch tarda más, se respeta el
-    // tiempo real (no agregamos delay extra encima).
-    const MIN_LOADER_MS = 1400;
+    // 3.4 s para que el usuario perciba bien la animación del barco
+    // ("buscando → te muestro el resultado"). Si el fetch tarda más,
+    // se respeta el tiempo real (no agregamos delay extra encima).
+    const MIN_LOADER_MS = 3400;
     const startedAt = Date.now();
 
     try {
