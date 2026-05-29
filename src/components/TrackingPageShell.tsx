@@ -3,12 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
-import {
-  AlertCircle,
-  ArrowLeft,
-  PackageSearch,
-  Search,
-} from "lucide-react";
+import { AlertCircle, PackageSearch, Search } from "lucide-react";
 import {
   fetchPublicTracking,
   TrackingNotFoundError,
@@ -70,20 +65,17 @@ export function TrackingPageShell() {
   };
 
   // ───── MODO RESULTS — full-width, mismo diseño que el operativo ─────
+  // El botón "Nueva búsqueda" vive ahora dentro del header navy del
+  // PublicTrackingView, al lado de "Actualizar". Acá solo damos el
+  // padding del navbar fijo para que el header no quede tapado.
   if (data) {
     return (
       <div className="min-h-screen bg-slate-50 pt-[60px] sm:pt-[72px]">
-        <div className="mx-auto max-w-7xl px-4 pt-4 sm:px-8 sm:pt-6">
-          <button
-            type="button"
-            onClick={onReset}
-            className="inline-flex items-center gap-1.5 rounded-full border border-navy-200 bg-white px-3 py-1.5 text-[11px] font-bold text-navy-700 transition hover:bg-navy-50"
-          >
-            <ArrowLeft className="h-3.5 w-3.5" />
-            Nueva búsqueda
-          </button>
-        </div>
-        <PublicTrackingView initialData={data} identifier={identifier} />
+        <PublicTrackingView
+          initialData={data}
+          identifier={identifier}
+          onReset={onReset}
+        />
       </div>
     );
   }

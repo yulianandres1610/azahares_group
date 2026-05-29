@@ -5,6 +5,7 @@ import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import {
   Anchor,
+  ArrowLeft,
   Boxes,
   CheckCircle2,
   ClipboardCheck,
@@ -160,9 +161,17 @@ interface Props {
   initialData: PublicTrackingResponse;
   /** Identificador usado para refresh (token o CAT). */
   identifier: string;
+  /** Callback opcional: cuando se renderiza dentro del shell de la
+   *  página corporativa, permite volver al form de búsqueda desde el
+   *  botón "Nueva búsqueda" del header. */
+  onReset?: () => void;
 }
 
-export function PublicTrackingView({ initialData, identifier }: Props) {
+export function PublicTrackingView({
+  initialData,
+  identifier,
+  onReset,
+}: Props) {
   const [data, setData] = useState<PublicTrackingResponse>(initialData);
   const [refreshing, setRefreshing] = useState(false);
   const [activeContainerId, setActiveContainerId] = useState<string | null>(
@@ -209,7 +218,12 @@ export function PublicTrackingView({ initialData, identifier }: Props) {
 
   return (
     <div className="bg-slate-50">
-      <Header data={data} refreshing={refreshing} onRefresh={() => load()} />
+      <Header
+        data={data}
+        refreshing={refreshing}
+        onRefresh={() => load()}
+        onReset={onReset}
+      />
 
       <main className="mx-auto max-w-7xl px-4 py-6 sm:px-8 sm:py-8">
         {/* Selector de PO arriba de todo cuando hay >= 2 POs. */}
@@ -312,10 +326,12 @@ function Header({
   data,
   refreshing,
   onRefresh,
+  onReset,
 }: {
   data: PublicTrackingResponse;
   refreshing: boolean;
   onRefresh: () => void;
+  onReset?: () => void;
 }) {
   return (
     <header className="bg-gradient-to-br from-navy-900 via-navy-800 to-navy-700 px-4 py-6 text-white sm:px-10">
@@ -346,17 +362,29 @@ function Header({
             {data.client.legalName}
           </p>
         </div>
-        <button
-          type="button"
-          onClick={onRefresh}
-          disabled={refreshing}
-          className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/10 px-3 py-2 text-xs font-semibold transition hover:bg-white/20 disabled:opacity-50"
-        >
-          <RefreshCw
-            className={cn("h-3.5 w-3.5", refreshing && "animate-spin")}
-          />
-          Actualizar
-        </button>
+        <div className="flex items-center gap-2">
+          {onReset && (
+            <button
+              type="button"
+              onClick={onReset}
+              className="inline-flex items-center gap-1.5 rounded-full border border-navy-200 bg-white px-3 py-1.5 text-[11px] font-bold text-navy-700 transition hover:bg-navy-50"
+            >
+              <ArrowLeft className="h-3.5 w-3.5" />
+              Nueva búsqueda
+            </button>
+          )}
+          <button
+            type="button"
+            onClick={onRefresh}
+            disabled={refreshing}
+            className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/10 px-3 py-2 text-xs font-semibold transition hover:bg-white/20 disabled:opacity-50"
+          >
+            <RefreshCw
+              className={cn("h-3.5 w-3.5", refreshing && "animate-spin")}
+            />
+            Actualizar
+          </button>
+        </div>
       </div>
       <p className="mx-auto mt-3 max-w-7xl text-[11px] text-white/60">
         Última actualización: {new Date(data.fetchedAt).toLocaleString("es")} ·
