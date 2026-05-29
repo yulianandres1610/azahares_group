@@ -87,13 +87,24 @@ const FEATURES = [
 export default function HomePage() {
   return (
     <>
-      {/* ───── HERO ───── */}
-      {/* Sin min-h forzado — el hero crece naturalmente al contenido,
-          evitando una franja navy vacía en el bottom cuando el contenido
-          es más chico que el viewport (Full HD especialmente). */}
-      <section className="hero-bg hero-bg-noise relative isolate overflow-hidden pt-24 pb-14 text-white sm:pt-32 sm:pb-24 lg:pt-32 lg:pb-28 xl:pt-36 xl:pb-32">
+      {/* ───── HERO ─────
+          Padding natural en mobile/sm/lg/xl — MBP 14" (1512px → cae en
+          xl) ya rellena bien el viewport con este padding.
+
+          A partir de 2xl (≥1536px, ej. monitor 1920×1080 externo) el
+          contenido es ~210px más corto que la pantalla y se ve una
+          banda blanca del feature section antes de scrollear. Usamos
+          `2xl:min-h-screen` + `2xl:flex 2xl:items-center` para que la
+          sección llene el viewport y centre el contenido verticalmente.
+          En MBP 14" no se activa porque está por debajo del breakpoint
+          2xl (1536px). */}
+      <section className="hero-bg hero-bg-noise relative isolate overflow-hidden pt-24 pb-14 text-white sm:pt-32 sm:pb-24 lg:pt-32 lg:pb-28 xl:pt-36 xl:pb-32 2xl:flex 2xl:min-h-screen 2xl:items-center 2xl:pb-20 2xl:pt-20">
         <HeroOrbs />
-        <div className="relative z-10 mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
+        {/* w-full a partir de 2xl: cuando el section pasa a flex para
+            centrar el contenido vertical en monitores 1920×1080, el div
+            necesita ocupar todo el ancho disponible para que mx-auto +
+            max-w-[1400px] sigan centrando horizontalmente. */}
+        <div className="relative z-10 mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12 2xl:w-full">
           <div className="grid items-center gap-10 lg:grid-cols-[1.1fr_1fr] lg:gap-12 xl:gap-16">
             <div className="text-center lg:text-left">
               {/* Typography mobile-tuned: h1 más chico para que no se
