@@ -3,7 +3,15 @@
 import { useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
-import { AlertCircle, PackageSearch, Search } from "lucide-react";
+import {
+  AlertCircle,
+  HelpCircle,
+  Link2,
+  Mail,
+  PackageSearch,
+  Search,
+  Ship,
+} from "lucide-react";
 import {
   fetchPublicTracking,
   TrackingNotFoundError,
@@ -11,8 +19,6 @@ import {
 } from "@/lib/tracking";
 import { PublicTrackingView } from "./PublicTrackingView";
 import { ShipLoader } from "./ShipLoader";
-
-const SAMPLE_CODES = [{ label: "CAT", value: "CAT52626825" }];
 
 /**
  * Shell de la página /tracking — cambia entre dos modos:
@@ -149,29 +155,68 @@ export function TrackingPageShell() {
                 </button>
               </div>
 
-              <div className="flex flex-wrap items-center gap-2">
-                <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-500">
-                  Probar con:
-                </span>
-                {SAMPLE_CODES.map((s) => (
-                  <button
-                    key={s.value}
-                    type="button"
-                    onClick={() => setQuery(s.value)}
-                    disabled={loading}
-                    className="group inline-flex items-center gap-1.5 rounded-full border border-navy-100 bg-navy-50/60 px-3 py-1 text-[11px] font-semibold text-navy-700 transition hover:border-navy-300 hover:bg-navy-100 disabled:opacity-50"
-                  >
-                    <span className="text-[9px] font-bold uppercase tracking-wider text-navy-500">
-                      {s.label}
-                    </span>
-                    <span className="font-mono">{s.value}</span>
-                  </button>
-                ))}
-                <span className="text-[11px] text-slate-400">
-                  o el link del email con tu token
-                </span>
-              </div>
             </form>
+
+            {/* ───── ¿Dónde encuentro mi código? ─────
+                Explicación de los dos formatos válidos que acepta el
+                backend (CAT de Crowley o token del email Azahares). */}
+            <div className="mt-5 rounded-2xl border border-navy-100 bg-navy-50/40 p-4 sm:p-5">
+              <div className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.18em] text-navy-700">
+                <HelpCircle className="h-3.5 w-3.5" />
+                ¿Dónde encuentro mi código?
+              </div>
+              <ul className="mt-3 space-y-3 text-[13px] leading-relaxed text-navy-900">
+                <li className="flex items-start gap-3">
+                  <span className="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-xl bg-navy-900 text-white shadow-[0_4px_12px_rgba(13,27,61,0.25)]">
+                    <Ship className="h-3.5 w-3.5" strokeWidth={2.2} />
+                  </span>
+                  <span className="min-w-0">
+                    <strong className="font-bold text-navy-900">
+                      Número de booking (CAT)
+                    </strong>
+                    <span className="block text-[12.5px] text-slate-600">
+                      Emitido por Crowley cuando confirman el booking
+                      marítimo. Empieza con{" "}
+                      <code className="rounded bg-white px-1 py-0.5 font-mono text-[11px] font-semibold text-navy-700 ring-1 ring-navy-200">
+                        CAT
+                      </code>{" "}
+                      seguido de dígitos. Lo encontrás en el email de
+                      confirmación que te enviamos al asignar el iso-tanque.
+                    </span>
+                  </span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-xl bg-navy-900 text-white shadow-[0_4px_12px_rgba(13,27,61,0.25)]">
+                    <Link2 className="h-3.5 w-3.5" strokeWidth={2.2} />
+                  </span>
+                  <span className="min-w-0">
+                    <strong className="font-bold text-navy-900">
+                      Link directo desde un email Azahares
+                    </strong>
+                    <span className="block text-[12.5px] text-slate-600">
+                      Todos los emails de tu pedido (cotización, factura,
+                      despacho) incluyen un botón{" "}
+                      <span className="font-semibold text-navy-700">
+                        Ver tracking
+                      </span>{" "}
+                      que abre la página con el token ya cargado — no
+                      necesitás escribir nada.
+                    </span>
+                  </span>
+                </li>
+              </ul>
+              <p className="mt-4 flex items-center gap-2 border-t border-navy-100 pt-3 text-[11.5px] leading-relaxed text-slate-500">
+                <Mail className="h-3.5 w-3.5 shrink-0 text-navy-500" />
+                ¿No encontrás el código? Escribinos a{" "}
+                <a
+                  href="mailto:info@azaharesgroup.com"
+                  className="font-semibold text-navy-700 underline-offset-2 hover:underline"
+                >
+                  info@azaharesgroup.com
+                </a>{" "}
+                y te lo enviamos.
+              </p>
+            </div>
 
             <AnimatePresence mode="wait">
               {loading && (
