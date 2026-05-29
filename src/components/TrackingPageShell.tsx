@@ -37,11 +37,28 @@ export function TrackingPageShell() {
     setData(null);
     if (!query.trim()) return;
     setLoading(true);
+
+    // Mínimo visible del loader. El fetch suele completar en <500 ms y
+    // el ShipLoader animado queda subliminal — forzamos un piso de
+    // 1.4 s para que el usuario perciba la transición "buscando → te
+    // muestro el resultado". Si el fetch tarda más, se respeta el
+    // tiempo real (no agregamos delay extra encima).
+    const MIN_LOADER_MS = 1400;
+    const startedAt = Date.now();
+
     try {
       const r = await fetchPublicTracking(query);
+      const elapsed = Date.now() - startedAt;
+      if (elapsed < MIN_LOADER_MS) {
+        await new Promise((res) => setTimeout(res, MIN_LOADER_MS - elapsed));
+      }
       setData(r);
       setIdentifier(query.trim().toUpperCase());
     } catch (err) {
+      const elapsed = Date.now() - startedAt;
+      if (elapsed < MIN_LOADER_MS) {
+        await new Promise((res) => setTimeout(res, MIN_LOADER_MS - elapsed));
+      }
       if (err instanceof TrackingNotFoundError) {
         setError(
           `No encontramos ningún envío con el código "${err.query}". Verificá que sea un número de booking (CAT…) o el token de tracking del email.`,
