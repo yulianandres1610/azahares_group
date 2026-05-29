@@ -74,17 +74,19 @@ const TIMELINE_STEPS: TimelineStepDef[] = [
     description: "Confirmaste los términos y el sistema generó la factura.",
     icon: ClipboardCheck,
   },
-  {
-    step: "payment_received",
-    label: "Pago recibido",
-    description: "Registramos tu pago y lo verificamos.",
-    icon: CreditCard,
-  },
+  // Invoice antes que payment — el flujo real es: aceptamos la
+  // cotización, emitimos la factura y el cliente paga contra esa factura.
   {
     step: "invoice_issued",
     label: "Factura emitida",
     description: "Tu factura comercial ya está disponible.",
     icon: Receipt,
+  },
+  {
+    step: "payment_received",
+    label: "Pago recibido",
+    description: "Registramos tu pago y lo verificamos.",
+    icon: CreditCard,
   },
   {
     step: "po_sent_to_supplier",

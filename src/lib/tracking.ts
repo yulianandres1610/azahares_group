@@ -22,8 +22,8 @@ export type TimelineStep =
   | "order_placed"
   | "quote_sent"
   | "quote_accepted"
-  | "payment_received"
   | "invoice_issued"
+  | "payment_received"
   | "po_sent_to_supplier"
   | "supplier_accepted"
   | "supplier_processing"
@@ -234,8 +234,10 @@ export const TIMELINE_ORDER: TimelineStep[] = [
   "order_placed",
   "quote_sent",
   "quote_accepted",
-  "payment_received",
+  // INVOICE primero, después PAGO — refleja el flujo real: emitimos la
+  // factura comercial y luego el cliente paga contra esa factura.
   "invoice_issued",
+  "payment_received",
   "po_sent_to_supplier",
   "supplier_accepted",
   "supplier_processing",
